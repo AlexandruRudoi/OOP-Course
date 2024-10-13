@@ -16,6 +16,8 @@ internal class Program
             foreach (var species in alienSpeciesList)
             {
                 species.PrintSpecies();
+                Console.WriteLine($"Classified as: {species.Classify()}");
+                Console.WriteLine("-------------------------------");
             }
         }
     }
