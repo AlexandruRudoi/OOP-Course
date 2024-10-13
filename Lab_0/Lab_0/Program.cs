@@ -1,6 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-using System;
+﻿using System;
 
 namespace Lab_0
 {
@@ -8,7 +6,9 @@ namespace Lab_0
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Please enter your some text:");
+            string text = Console.ReadLine();
+            Console.WriteLine("Here is the text: " + text);
         }
     }
 }
