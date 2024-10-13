@@ -1,14 +1,22 @@
 ﻿using System;
+using Lab_0.Domain;
 
-namespace Lab_0
+namespace Lab_0;
+
+internal class Program
 {
-    internal class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
+        JsonReader jsonReader = new JsonReader();
+        string jsonFilePath = "../../../input/input.json";
+        List<AlienSpecies> alienSpeciesList = jsonReader.ReadJson(jsonFilePath);
+
+        if (alienSpeciesList != null)
         {
-            Console.WriteLine("Please enter your some text:");
-            string text = Console.ReadLine();
-            Console.WriteLine("Here is the text: " + text);
+            foreach (var species in alienSpeciesList)
+            {
+                species.PrintSpecies();
+            }
         }
     }
 }
