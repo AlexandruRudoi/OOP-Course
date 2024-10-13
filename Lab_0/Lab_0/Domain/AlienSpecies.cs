@@ -61,13 +61,9 @@ public class AlienSpecies
         Console.WriteLine($"ID: {Id}, Planet: {Planet}, Age: {Age}, Humanoid: {IsHumanoid}");
 
         if (Traits != null && Traits.Count > 0)
-        {
             Console.WriteLine("Traits: " + string.Join(", ", Traits));
-        }
         else
-        {
             Console.WriteLine("Traits: None");
-        }
 
         Console.WriteLine();
     }
@@ -81,7 +77,7 @@ public class AlienSpecies
         var traits = Traits ?? new List<string>();
 
         // Scoring system: Each universe has a score based on matches
-        Dictionary<string, double> universeScores = new Dictionary<string, double>()
+        var universeScores = new Dictionary<string, double>
         {
             { "Star Wars Universe (Wookie)", 0 },
             { "Star Wars Universe (Ewok)", 0 },
@@ -91,7 +87,7 @@ public class AlienSpecies
             { "Lord of the Rings (Elf)", 0 },
             { "Lord of the Rings (Dwarf)", 0 }
         };
-        
+
         // Star Wars Universe (Wookie)
         if (Planet == "Kashyyyk") universeScores["Star Wars Universe (Wookie)"] += 0.4;
         if (traits.Contains("HAIRY") && traits.Contains("TALL"))

@@ -1,14 +1,14 @@
 ﻿using Lab_0.Domain;
 
-namespace Lab_0.Tests
+namespace Lab_0.Tests;
+
+[TestFixture]
+public class JsonReaderTests
 {
-    [TestFixture]
-    public class JsonReaderTests
+    [Test]
+    public void ReadJson_ShouldReturnAlienSpeciesList_WhenValidJsonIsProvided()
     {
-        [Test]
-        public void ReadJson_ShouldReturnAlienSpeciesList_WhenValidJsonIsProvided()
-        {
-            string mockJson = @"
+        var mockJson = @"
             {
                 ""input"": [
                     {
@@ -28,42 +28,41 @@ namespace Lab_0.Tests
                 ]
             }";
 
-            string tempFilePath = Path.GetTempFileName();
-            File.WriteAllText(tempFilePath, mockJson);
-            JsonReader jsonReader = new JsonReader();
-            List<AlienSpecies> result = jsonReader.ReadJson(tempFilePath);
+        var tempFilePath = Path.GetTempFileName();
+        File.WriteAllText(tempFilePath, mockJson);
+        var jsonReader = new JsonReader();
+        List<AlienSpecies> result = jsonReader.ReadJson(tempFilePath);
 
-            Assert.IsNotNull(result);
-            Assert.That(result.Count, Is.EqualTo(2));
+        Assert.IsNotNull(result);
+        Assert.That(result.Count, Is.EqualTo(2));
 
-            // Check details of the first alien species
-            Assert.That(result[0].Id, Is.EqualTo(1));
-            Assert.IsTrue(result[0].IsHumanoid);
-            Assert.That(result[0].Planet, Is.EqualTo("Mars"));
-            Assert.That(result[0].Age, Is.EqualTo(100));
-            Assert.Contains("Tall", result[0].Traits);
-            Assert.Contains("Smart", result[0].Traits);
+        // Check details of the first alien species
+        Assert.That(result[0].Id, Is.EqualTo(1));
+        Assert.IsTrue(result[0].IsHumanoid);
+        Assert.That(result[0].Planet, Is.EqualTo("Mars"));
+        Assert.That(result[0].Age, Is.EqualTo(100));
+        Assert.Contains("Tall", result[0].Traits);
+        Assert.Contains("Smart", result[0].Traits);
 
-            // Check details of the second alien species
-            Assert.That(result[1].Id, Is.EqualTo(2));
-            Assert.IsFalse(result[1].IsHumanoid);
-            Assert.That(result[1].Planet, Is.EqualTo("Venus"));
-            Assert.That(result[1].Age, Is.EqualTo(50));
-            Assert.Contains("Strong", result[1].Traits);
-        }
+        // Check details of the second alien species
+        Assert.That(result[1].Id, Is.EqualTo(2));
+        Assert.IsFalse(result[1].IsHumanoid);
+        Assert.That(result[1].Planet, Is.EqualTo("Venus"));
+        Assert.That(result[1].Age, Is.EqualTo(50));
+        Assert.Contains("Strong", result[1].Traits);
+    }
 
-        [Test]
-        public void ReadJson_ShouldReturnNull_WhenInvalidJsonIsProvided()
-        {
-            string malformedJson = @"{ ""input"": [ { ""id"": 1, ""isHumanoid"": true }";
+    [Test]
+    public void ReadJson_ShouldReturnNull_WhenInvalidJsonIsProvided()
+    {
+        var malformedJson = @"{ ""input"": [ { ""id"": 1, ""isHumanoid"": true }";
 
-            string tempFilePath = Path.GetTempFileName();
-            File.WriteAllText(tempFilePath, malformedJson);
+        var tempFilePath = Path.GetTempFileName();
+        File.WriteAllText(tempFilePath, malformedJson);
 
-            JsonReader jsonReader = new JsonReader();
-            List<AlienSpecies> result = jsonReader.ReadJson(tempFilePath);
+        var jsonReader = new JsonReader();
+        List<AlienSpecies> result = jsonReader.ReadJson(tempFilePath);
 
-            Assert.IsNull(result);
-        }
+        Assert.IsNull(result);
     }
 }

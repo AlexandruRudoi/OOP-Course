@@ -14,19 +14,15 @@ public class OutputWriter
     public void WriteToFile(string fileName, string universeName, List<AlienSpecies> individuals)
     {
         var outputDirectory = "../../../output";
-        if (!Directory.Exists(outputDirectory))
-        {
-            Directory.CreateDirectory(outputDirectory);
-        }
+        if (!Directory.Exists(outputDirectory)) Directory.CreateDirectory(outputDirectory);
 
         var universeOutput = new
         {
-            name = universeName,
-            individuals = individuals
+            name = universeName, individuals
         };
 
         var options = new JsonSerializerOptions { WriteIndented = true };
-        string jsonString = JsonSerializer.Serialize(universeOutput, options);
+        var jsonString = JsonSerializer.Serialize(universeOutput, options);
 
         // Write the output to a JSON file
         File.WriteAllText(Path.Combine(outputDirectory, fileName), jsonString);

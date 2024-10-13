@@ -2,24 +2,23 @@
 
 namespace Lab_0.Domain;
 
-
 public class JsonReader
 {
     public List<AlienSpecies> ReadJson(string filePath)
     {
         try
         {
-            string jsonString = File.ReadAllText(filePath);
-            
-            using (JsonDocument document = JsonDocument.Parse(jsonString))
+            var jsonString = File.ReadAllText(filePath);
+
+            using (var document = JsonDocument.Parse(jsonString))
             {
                 // Get the root element (the object containing the "input" array)
-                JsonElement root = document.RootElement;
-                JsonElement inputArray = root.GetProperty("input");
+                var root = document.RootElement;
+                var inputArray = root.GetProperty("input");
 
                 // Deserialize the "input" array into a List<AlienSpecies>
                 var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-                List<AlienSpecies> alienSpeciesList = JsonSerializer.Deserialize<List<AlienSpecies>>(inputArray.GetRawText(), options);
+                var alienSpeciesList = JsonSerializer.Deserialize<List<AlienSpecies>>(inputArray.GetRawText(), options);
 
                 return alienSpeciesList;
             }
