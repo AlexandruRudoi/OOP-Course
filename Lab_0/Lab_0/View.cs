@@ -3,7 +3,7 @@ using Lab_0.Domain;
 
 namespace Lab_0;
 
-public class OutputWriter
+public class View
 {
     /// <summary>
     ///     Writes the list of classified individuals to a JSON file in the specified output directory.
