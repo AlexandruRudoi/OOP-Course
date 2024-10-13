@@ -1,12 +1,13 @@
 # Alien Species Classification System
 
-This project is part of an Object-Oriented Programming (OOP) lab assignment. The goal is to create a system that reads JSON data representing alien species and classifies them based on attributes such as their planet of origin, age, and traits.
+This project is part of an Object-Oriented Programming (OOP) lab assignment. The goal is to create a system that reads JSON data representing alien species, classifies them based on attributes such as their planet of origin, age, and traits, and outputs the results to separate JSON files.
 
 ## Project Structure
 
-- **`AlienSpecies` Class**: Represents individual alien species, encapsulating their details like ID, planet, age, humanoid status, and traits.
+- **`AlienSpecies` Class**: Represents individual alien species, encapsulating their details like ID, planet, age, humanoid status, and traits, along with a classification method that assigns species to a fictional universe.
 - **`JsonReader` Class**: Responsible for reading a JSON file that contains an array of alien species and deserializing it into a list of `AlienSpecies` objects.
-- **Unit Tests for `JsonReader`**: Includes tests that validate the functionality of the `JsonReader` class, ensuring it can handle valid and malformed JSON inputs.
+- **`View` Class**: Handles writing the classified alien species to specific output JSON files, grouping them by their classified universe.
+- **Unit Tests for `AlienSpecies` and `JsonReader`**: Includes tests to validate both the classification logic in `AlienSpecies` and the JSON reading functionality in `JsonReader`.
 
 ## Classes
 
@@ -20,32 +21,43 @@ The `AlienSpecies` class models an alien species with the following properties:
 - `Age` (int?): The age of the alien species (nullable).
 - `Traits` (List<string>): A list of traits that describe the species (e.g., "Tall", "Strong").
 
-Additionally, it provides a method `PrintSpecies()` to display the alien's information in a formatted way.
+It also provides a method `PrintSpecies()` to display the alien's information in a formatted way and a method `Classify()` that classifies the alien species into a fictional universe based on its attributes.
 
-**Example Usage:**
+#### **Classification Method (`Classify()`)**:
+
+The `Classify` method applies a weighted scoring system to match the alien species to one of several fictional universes, such as:
+- **Star Wars Universe** (e.g., Wookie, Ewok)
+- **Marvel Universe** (e.g., Asgardian)
+- **Hitchhiker's Universe** (e.g., Vogon, Betelgeusian)
+- **Lord of the Rings Universe** (e.g., Elf, Dwarf)
+
+The classification is based on attributes like the species' planet, age, humanoid status, and traits. The system assigns a score to each universe, and the one with the highest score is returned as the classification.
+
+**Example Usage**:
 ```csharp
 AlienSpecies species = new AlienSpecies {
     Id = 1,
     IsHumanoid = true,
-    Planet = "Mars",
-    Age = 200,
-    Traits = new List<string> { "Tall", "Strong" }
+    Planet = "Asgard",
+    Age = 1500,
+    Traits = new List<string> { "Blonde", "Tall" }
 };
 
-species.PrintSpecies();
+string classification = species.Classify();
+Console.WriteLine(classification); // Outputs: "Marvel Universe (Asgardian)"
 ```
 
 ### `JsonReader`
-The `JsonReader` class handles the reading and parsing of a JSON file that contains an array of alien species. It provides a method `ReadJson(string filePath)` that reads the file and deserializes the "input" field from the JSON into a list of `AlienSpecies`.
+The `JsonReader` class handles reading and parsing a JSON file that contains an array of alien species. It provides a method `ReadJson(string filePath)` that reads the file and deserializes the "input" field from the JSON into a list of `AlienSpecies`.
 
 Key Functionality:
 
-- `Reads` a JSON file from the given file path.
+- Reads a JSON file from the specified file path.
 - Extracts the `"input"` array, which contains a list of alien species.
 - Deserializes the JSON array into a list of `AlienSpecies` objects.
 - Returns `null` if an error occurs during reading or parsing.
 
-**Example Usage:**
+**Example Usage**:
 ```csharp
 JsonReader jsonReader = new JsonReader();
 List<AlienSpecies> alienSpeciesList = jsonReader.ReadJson("path/to/input.json");
@@ -59,16 +71,62 @@ if (alienSpeciesList != null)
 }
 ```
 
-### `Unit Tests for JsonReader`
-Unit tests are provided using the NUnit framework to validate the behavior of the `JsonReader` class. The following tests are implemented:
+### `View`
 
-- `ReadJson_ShouldReturnAlienSpeciesList_WhenValidJsonIsProvided`: This test checks that the `JsonReader` can successfully parse a valid JSON file and return a list of alien species.
+The `View` class is responsible for writing the classified alien species into separate JSON files based on their fictional universe. It groups individuals by their classification and writes them into four output files:
+- `hitchhiker.json`
+- `marvel.json`
+- `rings.json` (for Lord of the Rings)
+- `starwars.json`
 
-- `ReadJson_ShouldReturnNull_WhenInvalidJsonIsProvided`: This test checks that the `JsonReader` correctly handles invalid JSON (e.g., missing closing brackets) by returning `null`.
+**Key Method**:
+- `WriteToFile(string fileName, string universeName, List<AlienSpecies> individuals)`: Writes the list of classified individuals into a specified JSON file with the appropriate universe name.
 
-These tests ensure that the `JsonReader` class behaves correctly in both normal and error scenarios.
+**Example Usage**:
+```csharp
+View view = new View();
+view.WriteToFile("hitchhiker.json", "hitchHiker", hitchhikerList);
+```
 
-**Example NUnit Test for Valid JSON:**
+### Unit Tests
+
+#### Unit Tests for `AlienSpecies`
+
+Unit tests are provided using the NUnit framework to validate the classification logic within the `AlienSpecies` class.
+
+Tests include:
+- `Classify_ShouldReturnWookie_ForKashyyykHairyTallSpecies`: Verifies that an alien species from Kashyyyk with the traits "HAIRY" and "TALL" is classified as a Wookie from the Star Wars universe.
+- `Classify_ShouldReturnEwok_ForEndorShortHairySpecies`: Verifies that an alien species from Endor with the traits "SHORT" and "HAIRY" is classified as an Ewok from the Star Wars universe.
+- Additional tests ensure the correct classification for species from the Marvel, Hitchhiker’s, and Lord of the Rings universes.
+
+**Example NUnit Test for Classification**:
+```csharp
+[Test]
+public void Classify_ShouldReturnWookie_ForKashyyykHairyTallSpecies()
+{
+    var species = new AlienSpecies
+    {
+        Id = 1,
+        IsHumanoid = false,
+        Planet = "Kashyyyk",
+        Age = 300,
+        Traits = new List<string> { "HAIRY", "TALL" }
+    };
+
+    var classification = species.Classify();
+    Assert.AreEqual("Star Wars Universe (Wookie)", classification);
+}
+```
+
+#### Unit Tests for `JsonReader`
+
+Unit tests validate that the `JsonReader` can correctly read and deserialize a JSON file containing alien species.
+
+Tests include:
+- `ReadJson_ShouldReturnAlienSpeciesList_WhenValidJsonIsProvided`: Ensures that valid JSON is correctly deserialized into a list of `AlienSpecies`.
+- `ReadJson_ShouldReturnNull_WhenInvalidJsonIsProvided`: Checks that the method handles invalid JSON correctly by returning `null`.
+
+**Example NUnit Test for `JsonReader`**:
 ```csharp
 [Test]
 public void ReadJson_ShouldReturnAlienSpeciesList_WhenValidJsonIsProvided()
@@ -106,3 +164,30 @@ public void ReadJson_ShouldReturnAlienSpeciesList_WhenValidJsonIsProvided()
     Assert.Contains("Tall", result[0].Traits);
 }
 ```
+
+### Example Output
+
+The system generates four JSON files in the `output` directory based on the classification of alien species. An example of `hitchhiker.json` is shown below:
+
+```json
+{
+  "name": "hitchHiker",
+  "individuals": [
+    {
+      "id": 3,
+      "isHumanoid": true,
+      "planet": "Betelgeuse",
+      "age": 59,
+      "traits": [
+        "EXTRA_ARMS",
+        "EXTRA_HEAD"
+      ]
+    }
+  ]
+}
+```
+
+---
+
+### License
+Feel free to use, modify, and distribute this project for any purpose.
