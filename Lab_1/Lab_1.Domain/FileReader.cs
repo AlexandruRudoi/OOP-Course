@@ -1,8 +1,8 @@
-﻿namespace Lab_1;
+﻿namespace Lab_1.Domain;
 
 public class FileReader
 {
-    public string? ReadFileIntoString(string filePath)
+    public string ReadFileIntoString(string filePath)
     {
         try
         {
