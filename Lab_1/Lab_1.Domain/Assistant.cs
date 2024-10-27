@@ -66,10 +66,8 @@ public class Assistant
             Console.WriteLine($"{d.Model} has been bought and removed from {_assistantName}'s assigned displays.");
             return d;
         }
-        else
-        {
-            Console.WriteLine($"{d.Model} could not be found in {_assistantName}'s assigned displays.");
-            return null;
-        }
+
+        Console.WriteLine($"{d.Model} could not be found in {_assistantName}'s assigned displays.");
+        return null;
     }
 }

@@ -47,7 +47,9 @@ internal class Program
                 results.Add(textData.ToString());
             }
             else
+            {
                 results.Add($"Failed to read the file: {filePath}");
+            }
         }
 
         Console.WriteLine("\n--- TextData Results ---");
