@@ -30,7 +30,7 @@ public class Assistant
     /// </summary>
     public void Assist()
     {
-        Console.WriteLine($"Assistant {_assistantName} is helping with display comparison:");
+        Console.WriteLine($"\nAssistant {_assistantName} is helping with display comparison:");
 
         if (_assignedDisplays.Count < 2)
         {

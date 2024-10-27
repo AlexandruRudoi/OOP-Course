@@ -80,7 +80,7 @@ public class Display
     /// <param name="other">The other <see cref="Display" /> object to compare with.</param>
     public void CompareWithMonitor(Display other)
     {
-        Console.WriteLine($"Comparing {Model} with {other.Model}:");
+        Console.WriteLine($"\nComparing {Model} with {other.Model}:");
         CompareSize(other);
         CompareSharpness(other);
     }
