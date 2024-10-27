@@ -31,7 +31,7 @@ public class JsonReaderTests
         var tempFilePath = Path.GetTempFileName();
         File.WriteAllText(tempFilePath, mockJson);
         var jsonReader = new JsonReader();
-        List<AlienSpecies> result = jsonReader.ReadJson(tempFilePath);
+        List<AlienSpecies> result = jsonReader.ReadJsonIntoAlienList(tempFilePath);
 
         Assert.IsNotNull(result);
         Assert.That(result.Count, Is.EqualTo(2));
@@ -61,7 +61,7 @@ public class JsonReaderTests
         File.WriteAllText(tempFilePath, malformedJson);
 
         var jsonReader = new JsonReader();
-        List<AlienSpecies> result = jsonReader.ReadJson(tempFilePath);
+        List<AlienSpecies> result = jsonReader.ReadJsonIntoAlienList(tempFilePath);
 
         Assert.IsNull(result);
     }

@@ -7,10 +7,9 @@ internal class Program
     private static void Main(string[] args)
     {
         JsonReader jsonReader = new JsonReader();
-        View view = new View(); 
         
         string jsonFilePath = "../../../input/input.json";
-        List<AlienSpecies> alienSpeciesList = jsonReader.ReadJson(jsonFilePath);
+        List<AlienSpecies> alienSpeciesList = jsonReader.ReadJsonIntoAlienList(jsonFilePath);
 
         if (alienSpeciesList != null)
         {
@@ -31,7 +30,8 @@ internal class Program
                     ringsList.Add(species);
                 else if (classification.Contains("Star Wars")) starwarsList.Add(species);
             }
-
+            
+            View view = new View(); 
             view.WriteToFile("hitchhiker.json", "hitchHiker", hitchhikerList);
             view.WriteToFile("marvel.json", "marvel", marvelList);
             view.WriteToFile("rings.json", "rings", ringsList);

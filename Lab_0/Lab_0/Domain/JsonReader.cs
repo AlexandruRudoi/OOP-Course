@@ -4,7 +4,7 @@ namespace Lab_0.Domain;
 
 public class JsonReader
 {
-    public List<AlienSpecies> ReadJson(string filePath)
+    public List<AlienSpecies> ReadJsonIntoAlienList(string filePath)
     {
         try
         {
