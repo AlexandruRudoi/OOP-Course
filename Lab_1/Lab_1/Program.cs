@@ -6,21 +6,16 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        // Create some Display objects
-        Display display1 = new Display(1920, 1080, 401.5f, "Display One");
-        Display display2 = new Display(2560, 1440, 350.0f, "Display Two");
-        Display display3 = new Display(3840, 2160, 500.0f, "Display Three");
+        var display1 = new Display(1920, 1080, 401.5f, "Display One");
+        var display2 = new Display(2560, 1440, 350.0f, "Display Two");
+        var display3 = new Display(3840, 2160, 500.0f, "Display Three");
 
-        // Create an Assistant and assign displays
-        Assistant assistant = new Assistant("Tech Assistant");
+        var assistant = new Assistant("Tech Assistant");
         assistant.AssignDisplay(display1);
         assistant.AssignDisplay(display2);
         assistant.AssignDisplay(display3);
 
-        // Use the assistant to compare displays
         assistant.Assist();
-
-        // Buy a display (remove it from the list)
         assistant.BuyDisplay(display2);
 
         // var filePath = args[0];

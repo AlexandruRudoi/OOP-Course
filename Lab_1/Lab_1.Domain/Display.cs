@@ -3,7 +3,7 @@
 public class Display
 {
     /// <summary>
-    /// Gets or sets the width of the display in pixels.
+    ///     Gets or sets the width of the display in pixels.
     /// </summary>
     public int Width { get; set; }
 

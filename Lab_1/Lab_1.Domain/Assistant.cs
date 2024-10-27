@@ -6,17 +6,17 @@ public class Assistant
     private List<Display> _assignedDisplays;
 
     /// <summary>
-    /// Initializes a new instance of the Assistant class with the specified name.
+    ///     Initializes a new instance of the Assistant class with the specified name.
     /// </summary>
     /// <param name="assistantName">The name of the assistant.</param>
     public Assistant(string assistantName)
     {
-        this._assistantName = assistantName;
-        this._assignedDisplays = new List<Display>();
+        _assistantName = assistantName;
+        _assignedDisplays = new List<Display>();
     }
 
     /// <summary>
-    /// Adds a Display object to the assignedDisplays list.
+    ///     Adds a Display object to the assignedDisplays list.
     /// </summary>
     /// <param name="d">The Display object to be assigned to the assistant.</param>
     public void AssignDisplay(Display d)
@@ -26,7 +26,7 @@ public class Assistant
     }
 
     /// <summary>
-    /// Compares each Display object in the assignedDisplays list sequentially.
+    ///     Compares each Display object in the assignedDisplays list sequentially.
     /// </summary>
     public void Assist()
     {
@@ -38,17 +38,17 @@ public class Assistant
             return;
         }
 
-        for (int i = 0; i < _assignedDisplays.Count - 1; i++)
+        for (var i = 0; i < _assignedDisplays.Count - 1; i++)
         {
-            Display current = _assignedDisplays[i];
-            Display next = _assignedDisplays[i + 1];
+            var current = _assignedDisplays[i];
+            var next = _assignedDisplays[i + 1];
 
             current.CompareWithMonitor(next);
         }
     }
 
     /// <summary>
-    /// Removes a specified Display object from the assignedDisplays list and returns it.
+    ///     Removes a specified Display object from the assignedDisplays list and returns it.
     /// </summary>
     /// <param name="d">The Display object to be bought.</param>
     /// <returns>The Display object that was removed from the list, or null if not found.</returns>
