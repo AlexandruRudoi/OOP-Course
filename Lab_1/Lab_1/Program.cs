@@ -13,5 +13,9 @@ internal class Program
         display1.CompareWithMonitor(display2);
         display2.CompareWithMonitor(display3);
         display1.CompareWithMonitor(display3);
+        
+        string filePath = args[0];
+        FileReader fileReader = new FileReader();
+        string textContent = fileReader.ReadFileIntoString(filePath);
     }
 }
