@@ -5,22 +5,22 @@ public class Display
     /// <summary>
     /// Gets or sets the width of the display in pixels.
     /// </summary>
-    private int Width { get; set; }
+    public int Width { get; set; }
 
     /// <summary>
     ///     Gets or sets the height of the display in pixels.
     /// </summary>
-    private int Height { get; set; }
+    public int Height { get; set; }
 
     /// <summary>
     ///     Gets or sets the pixel density (pixels per inch) of the display.
     /// </summary>
-    private float Ppi { get; set; }
+    public float Ppi { get; set; }
 
     /// <summary>
     ///     Gets or sets the model name of the display.
     /// </summary>
-    private string Model { get; set; }
+    public string Model { get; set; }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Display"/> class with specified dimensions, pixel density, and model.
