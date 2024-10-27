@@ -8,11 +8,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Lab_1.Domain\Lab_1.Domain.csproj" />
+        <ProjectReference Include="..\Lab_1.Domain\Lab_1.Domain.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Input\" />
+        <Folder Include="Input\"/>
     </ItemGroup>
 
 </Project>

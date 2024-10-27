@@ -16,13 +16,13 @@ internal class Program
         // display2.CompareWithMonitor(display3);
         // display1.CompareWithMonitor(display3);
 
-        string filePath = args[0];
-        FileReader fileReader = new FileReader();
-        string textContent = fileReader.ReadFileIntoString(filePath);
+        var filePath = args[0];
+        var fileReader = new FileReader();
+        var textContent = fileReader.ReadFileIntoString(filePath);
 
         if (textContent != null)
         {
-            TextData textData = new TextData(textContent, System.IO.Path.GetFileName(filePath));
+            var textData = new TextData(textContent, Path.GetFileName(filePath));
             Console.WriteLine(textData.ToString());
         }
     }

@@ -8,17 +8,17 @@ public class Display
     private int Width { get; set; }
 
     /// <summary>
-    /// Gets or sets the height of the display in pixels.
+    ///     Gets or sets the height of the display in pixels.
     /// </summary>
     private int Height { get; set; }
 
     /// <summary>
-    /// Gets or sets the pixel density (pixels per inch) of the display.
+    ///     Gets or sets the pixel density (pixels per inch) of the display.
     /// </summary>
     private float Ppi { get; set; }
 
     /// <summary>
-    /// Gets or sets the model name of the display.
+    ///     Gets or sets the model name of the display.
     /// </summary>
     private string Model { get; set; }
 
@@ -38,7 +38,7 @@ public class Display
     }
 
     /// <summary>
-    /// Calculates the area of the display in pixels.
+    ///     Calculates the area of the display in pixels.
     /// </summary>
     /// <returns>The area of the display (width * height).</returns>
     private int Area()
@@ -47,52 +47,40 @@ public class Display
     }
 
     /// <summary>
-    /// Compares the size of this display with another display based on area.
+    ///     Compares the size of this display with another display based on area.
     /// </summary>
-    /// <param name="other">The other <see cref="Display"/> object to compare with.</param>
+    /// <param name="other">The other <see cref="Display" /> object to compare with.</param>
     public void CompareSize(Display other)
     {
-        if (this.Area() > other.Area())
-        {
-            Console.WriteLine($"{this.Model} is bigger in size than {other.Model}.");
-        }
-        else if (this.Area() < other.Area())
-        {
-            Console.WriteLine($"{this.Model} is smaller in size than {other.Model}.");
-        }
+        if (Area() > other.Area())
+            Console.WriteLine($"{Model} is bigger in size than {other.Model}.");
+        else if (Area() < other.Area())
+            Console.WriteLine($"{Model} is smaller in size than {other.Model}.");
         else
-        {
-            Console.WriteLine($"{this.Model} and {other.Model} are equal in size.");
-        }
+            Console.WriteLine($"{Model} and {other.Model} are equal in size.");
     }
 
     /// <summary>
-    /// Compares the sharpness of this display with another display based on pixel density (ppi).
+    ///     Compares the sharpness of this display with another display based on pixel density (ppi).
     /// </summary>
-    /// <param name="other">The other <see cref="Display"/> object to compare with.</param>
+    /// <param name="other">The other <see cref="Display" /> object to compare with.</param>
     public void CompareSharpness(Display other)
     {
-        if (this.Ppi > other.Ppi)
-        {
-            Console.WriteLine($"{this.Model} is sharper than {other.Model}.");
-        }
-        else if (this.Ppi < other.Ppi)
-        {
-            Console.WriteLine($"{this.Model} is less sharp than {other.Model}.");
-        }
+        if (Ppi > other.Ppi)
+            Console.WriteLine($"{Model} is sharper than {other.Model}.");
+        else if (Ppi < other.Ppi)
+            Console.WriteLine($"{Model} is less sharp than {other.Model}.");
         else
-        {
-            Console.WriteLine($"{this.Model} and {other.Model} have the same sharpness.");
-        }
+            Console.WriteLine($"{Model} and {other.Model} have the same sharpness.");
     }
 
     /// <summary>
-    /// Compares both the size and sharpness of this display with another display, providing a detailed output.
+    ///     Compares both the size and sharpness of this display with another display, providing a detailed output.
     /// </summary>
-    /// <param name="other">The other <see cref="Display"/> object to compare with.</param>
+    /// <param name="other">The other <see cref="Display" /> object to compare with.</param>
     public void CompareWithMonitor(Display other)
     {
-        Console.WriteLine($"Comparing {this.Model} with {other.Model}:");
+        Console.WriteLine($"Comparing {Model} with {other.Model}:");
         CompareSize(other);
         CompareSharpness(other);
     }

@@ -12,20 +12,20 @@ public class TextData
 
     public TextData(string text, string fileName)
     {
-        this._text = text;
-        this._fileName = fileName;
+        _text = text;
+        _fileName = fileName;
         ProcessTextData();
     }
 
     private void ProcessTextData()
     {
-        string vowels = "aeiouAEIOU";
-        this._numberOfVowels = this._text.Count(c => vowels.Contains(c));
-        this._numberOfConsonants = this._text.Count(c => char.IsLetter(c) && !vowels.Contains(c));
-        this._numberOfLetters = this._text.Count(char.IsLetter);
-        this._numberOfSentences = this._text.Split(new[] { '.', '!', '?' },
+        var vowels = "aeiouAEIOU";
+        _numberOfVowels = _text.Count(c => vowels.Contains(c));
+        _numberOfConsonants = _text.Count(c => char.IsLetter(c) && !vowels.Contains(c));
+        _numberOfLetters = _text.Count(char.IsLetter);
+        _numberOfSentences = _text.Split(new[] { '.', '!', '?' },
             StringSplitOptions.RemoveEmptyEntries).Length;
-        this._longestWord = this._text.Split(new[] { ' ', '.', ',', '!', '?' }, StringSplitOptions.RemoveEmptyEntries)
+        _longestWord = _text.Split(new[] { ' ', '.', ',', '!', '?' }, StringSplitOptions.RemoveEmptyEntries)
             .OrderByDescending(w => w.Length).FirstOrDefault() ?? string.Empty;
     }
 
