@@ -2,7 +2,14 @@
 
 public class Assistant
 {
+    /// <summary>
+    ///     The name of the assistant.
+    /// </summary>
     private string _assistantName;
+
+    /// <summary>
+    ///     A list of Display objects assigned to the assistant.
+    /// </summary>
     private List<Display> _assignedDisplays;
 
     /// <summary>
