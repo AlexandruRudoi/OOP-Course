@@ -3,8 +3,6 @@ C:\Users\Alex\OneDrive\Desktop\University\OOP\Labs\OOP-Course\Lab_2\Lab_2\bin\De
 C:\Users\Alex\OneDrive\Desktop\University\OOP\Labs\OOP-Course\Lab_2\Lab_2\bin\Debug\net8.0\Lab_2.runtimeconfig.json
 C:\Users\Alex\OneDrive\Desktop\University\OOP\Labs\OOP-Course\Lab_2\Lab_2\bin\Debug\net8.0\Lab_2.dll
 C:\Users\Alex\OneDrive\Desktop\University\OOP\Labs\OOP-Course\Lab_2\Lab_2\bin\Debug\net8.0\Lab_2.pdb
-C:\Users\Alex\OneDrive\Desktop\University\OOP\Labs\OOP-Course\Lab_2\Lab_2\bin\Debug\net8.0\Lab_2.CoffeeShop.dll
-C:\Users\Alex\OneDrive\Desktop\University\OOP\Labs\OOP-Course\Lab_2\Lab_2\bin\Debug\net8.0\Lab_2.CoffeeShop.pdb
 C:\Users\Alex\OneDrive\Desktop\University\OOP\Labs\OOP-Course\Lab_2\Lab_2\obj\Debug\net8.0\Lab_2.csproj.AssemblyReference.cache
 C:\Users\Alex\OneDrive\Desktop\University\OOP\Labs\OOP-Course\Lab_2\Lab_2\obj\Debug\net8.0\Lab_2.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Alex\OneDrive\Desktop\University\OOP\Labs\OOP-Course\Lab_2\Lab_2\obj\Debug\net8.0\Lab_2.AssemblyInfoInputs.cache
@@ -17,3 +15,5 @@ C:\Users\Alex\OneDrive\Desktop\University\OOP\Labs\OOP-Course\Lab_2\Lab_2\obj\De
 C:\Users\Alex\OneDrive\Desktop\University\OOP\Labs\OOP-Course\Lab_2\Lab_2\obj\Debug\net8.0\Lab_2.pdb
 C:\Users\Alex\OneDrive\Desktop\University\OOP\Labs\OOP-Course\Lab_2\Lab_2\obj\Debug\net8.0\Lab_2.genruntimeconfig.cache
 C:\Users\Alex\OneDrive\Desktop\University\OOP\Labs\OOP-Course\Lab_2\Lab_2\obj\Debug\net8.0\ref\Lab_2.dll
+C:\Users\Alex\OneDrive\Desktop\University\OOP\Labs\OOP-Course\Lab_2\Lab_2\bin\Debug\net8.0\Lab_2.Task2.dll
+C:\Users\Alex\OneDrive\Desktop\University\OOP\Labs\OOP-Course\Lab_2\Lab_2\bin\Debug\net8.0\Lab_2.Task2.pdb
