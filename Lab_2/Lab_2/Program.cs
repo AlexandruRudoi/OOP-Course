@@ -4,6 +4,10 @@ namespace Lab_2;
 
 internal class Program
 {
+    /// <summary>
+    ///     Main method for the Coffee Shop application.
+    ///     This method provides an interactive menu to allow users to place coffee orders and then prepares each coffee.
+    /// </summary>
     private static void Main(string[] args)
     {
         var barista = new Barista();
@@ -79,6 +83,10 @@ internal class Program
         barista.TakeOrder(orders);
     }
 
+    /// <summary>
+    ///     Prompts the user to select an intensity level for the coffee.
+    /// </summary>
+    /// <returns>The selected <see cref="Intensity"/> of the coffee.</returns>
     private static Intensity GetIntensity()
     {
         Console.WriteLine("Select Intensity:");
@@ -97,6 +105,10 @@ internal class Program
         };
     }
 
+    /// <summary>
+    ///     Prompts the user to enter the amount of milk in milliliters.
+    /// </summary>
+    /// <returns>The amount of milk in milliliters as an integer.</returns>
     private static int GetMilkAmount()
     {
         Console.Write("Enter amount of milk in ml: ");
@@ -109,6 +121,10 @@ internal class Program
         return 50; // Default value
     }
 
+    /// <summary>
+    ///     Prompts the user to enter the amount of pumpkin spice in milligrams.
+    /// </summary>
+    /// <returns>The amount of pumpkin spice in milligrams as an integer.</returns>
     private static int GetPumpkinSpiceAmount()
     {
         Console.Write("Enter amount of pumpkin spice in mg: ");
@@ -121,6 +137,10 @@ internal class Program
         return 10; // Default value
     }
 
+    /// <summary>
+    ///     Prompts the user to select a syrup type for the coffee.
+    /// </summary>
+    /// <returns>The selected <see cref="SyrupType"/> for the coffee.</returns>
     private static SyrupType GetSyrupType()
     {
         Console.WriteLine("Select Syrup Type:");
