@@ -7,7 +7,8 @@ public class PumpkinSpiceLatte : Coffee
     private const string _coffeeName = "PumpkinSpiceLatte";
 
     /// <summary>
-    ///     Initializes a new instance of the <see cref="PumpkinSpiceLatte"/> class with the specified intensity, milk, and pumpkin spice amounts.
+    ///     Initializes a new instance of the <see cref="PumpkinSpiceLatte" /> class with the specified intensity, milk, and
+    ///     pumpkin spice amounts.
     /// </summary>
     /// <param name="intensity">The intensity level of the latte.</param>
     /// <param name="mlOfMilk">The amount of milk in milliliters.</param>
@@ -40,7 +41,7 @@ public class PumpkinSpiceLatte : Coffee
     ///     Gets the name of the Pumpkin Spice Latte.
     /// </summary>
     public string CoffeeName => _coffeeName;
-    
+
     /// <summary>
     ///     Prints the details of the Pumpkin Spice Latte.
     /// </summary>

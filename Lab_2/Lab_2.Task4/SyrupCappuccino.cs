@@ -7,7 +7,8 @@ internal class SyrupCappuccino : Coffee
     private const string _coffeeName = "SyrupCappuccino";
 
     /// <summary>
-    ///     Initializes a new instance of the <see cref="SyrupCappuccino"/> class with the specified intensity, milk, and syrup type.
+    ///     Initializes a new instance of the <see cref="SyrupCappuccino" /> class with the specified intensity, milk, and
+    ///     syrup type.
     /// </summary>
     /// <param name="intensity">The intensity level of the syrup cappuccino.</param>
     /// <param name="mlOfMilk">The amount of milk in milliliters.</param>

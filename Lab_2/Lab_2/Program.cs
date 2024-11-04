@@ -14,7 +14,7 @@ internal class Program
         var orders =
             new List<(string CoffeeType, Intensity Intensity, int? MlOfMilk, int? MgOfPumpkinSpice, SyrupType? Syrup
                 )>();
-        bool addingMoreCoffees = true;
+        var addingMoreCoffees = true;
 
         Console.WriteLine("Welcome to the Coffee Shop!\n");
 
@@ -30,8 +30,8 @@ internal class Program
             Console.Write("Please select an option (1-5): ");
             var choice = Console.ReadLine();
 
-            string coffeeType = string.Empty;
-            Intensity intensity = Intensity.NORMAL;
+            var coffeeType = string.Empty;
+            var intensity = Intensity.NORMAL;
             int? mlOfMilk = null;
             int? mgOfPumpkinSpice = null;
             SyrupType? syrupType = null;
@@ -86,7 +86,7 @@ internal class Program
     /// <summary>
     ///     Prompts the user to select an intensity level for the coffee.
     /// </summary>
-    /// <returns>The selected <see cref="Intensity"/> of the coffee.</returns>
+    /// <returns>The selected <see cref="Intensity" /> of the coffee.</returns>
     private static Intensity GetIntensity()
     {
         Console.WriteLine("Select Intensity:");
@@ -112,10 +112,7 @@ internal class Program
     private static int GetMilkAmount()
     {
         Console.Write("Enter amount of milk in ml: ");
-        if (int.TryParse(Console.ReadLine(), out int mlOfMilk))
-        {
-            return mlOfMilk;
-        }
+        if (int.TryParse(Console.ReadLine(), out var mlOfMilk)) return mlOfMilk;
 
         Console.WriteLine("Invalid input. Setting milk to 50 ml by default.");
         return 50; // Default value
@@ -128,10 +125,7 @@ internal class Program
     private static int GetPumpkinSpiceAmount()
     {
         Console.Write("Enter amount of pumpkin spice in mg: ");
-        if (int.TryParse(Console.ReadLine(), out int mgOfPumpkinSpice))
-        {
-            return mgOfPumpkinSpice;
-        }
+        if (int.TryParse(Console.ReadLine(), out var mgOfPumpkinSpice)) return mgOfPumpkinSpice;
 
         Console.WriteLine("Invalid input. Setting pumpkin spice to 10 mg by default.");
         return 10; // Default value
@@ -140,7 +134,7 @@ internal class Program
     /// <summary>
     ///     Prompts the user to select a syrup type for the coffee.
     /// </summary>
-    /// <returns>The selected <see cref="SyrupType"/> for the coffee.</returns>
+    /// <returns>The selected <see cref="SyrupType" /> for the coffee.</returns>
     private static SyrupType GetSyrupType()
     {
         Console.WriteLine("Select Syrup Type:");

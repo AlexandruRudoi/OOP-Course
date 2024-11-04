@@ -6,7 +6,7 @@ internal class Coffee
     private const string _name = "Coffee";
 
     /// <summary>
-    ///     Initializes a new instance of the <see cref="Coffee"/> class with the specified intensity.
+    ///     Initializes a new instance of the <see cref="Coffee" /> class with the specified intensity.
     /// </summary>
     /// <param name="intensity">The intensity level of the coffee.</param>
     public Coffee(Intensity intensity)

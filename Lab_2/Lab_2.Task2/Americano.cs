@@ -6,7 +6,7 @@ public class Americano : Coffee
     private const string _coffeeName = "Americano";
 
     /// <summary>
-    ///     Initializes a new instance of the <see cref="Americano"/> class with the specified intensity and water amount.
+    ///     Initializes a new instance of the <see cref="Americano" /> class with the specified intensity and water amount.
     /// </summary>
     /// <param name="intensity">The intensity level of the Americano.</param>
     /// <param name="mlOfWater">The amount of water in milliliters.</param>
@@ -28,7 +28,7 @@ public class Americano : Coffee
     ///     Gets the name of the Americano.
     /// </summary>
     public string CoffeeName => _coffeeName;
-    
+
     /// <summary>
     ///     Prints the details of the Americano.
     /// </summary>

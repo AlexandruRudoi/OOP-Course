@@ -3,14 +3,13 @@
 public class Barista
 {
     /// <summary>
-    /// Accepts a list of coffee orders and prepares each coffee.
+    ///     Accepts a list of coffee orders and prepares each coffee.
     /// </summary>
     public void TakeOrder(
         List<(string CoffeeType, Intensity Intensity, int? MlOfMilk, int? MgOfPumpkinSpice, SyrupType? Syrup)>
             orderList)
     {
         foreach (var order in orderList)
-        {
             switch (order.CoffeeType.ToLower())
             {
                 case "cappuccino":
@@ -43,6 +42,5 @@ public class Barista
                     Console.WriteLine($"Unknown coffee type: {order.CoffeeType}");
                     break;
             }
-        }
     }
 }

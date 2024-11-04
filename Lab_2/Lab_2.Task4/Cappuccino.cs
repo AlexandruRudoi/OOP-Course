@@ -4,9 +4,9 @@ internal class Cappuccino : Coffee
 {
     private int _mlOfMilk;
     private const string _coffeeName = "Cappuccino";
-    
+
     /// <summary>
-    ///     Initializes a new instance of the <see cref="Cappuccino"/> class with the specified intensity and milk amount.
+    ///     Initializes a new instance of the <see cref="Cappuccino" /> class with the specified intensity and milk amount.
     /// </summary>
     /// <param name="intensity">The intensity level of the cappuccino.</param>
     /// <param name="mlOfMilk">The amount of milk in milliliters.</param>
