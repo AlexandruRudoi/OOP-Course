@@ -11,6 +11,16 @@
         "runtime": {
           "bin/placeholder/Lab_2.Task2.dll": {}
         }
+      },
+      "Lab_2.Task3/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/Lab_2.Task3.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Lab_2.Task3.dll": {}
+        }
       }
     }
   },
@@ -19,11 +29,17 @@
       "type": "project",
       "path": "../Lab_2.Task2/Lab_2.Task2.csproj",
       "msbuildProject": "../Lab_2.Task2/Lab_2.Task2.csproj"
+    },
+    "Lab_2.Task3/1.0.0": {
+      "type": "project",
+      "path": "../Lab_2.Task3/Lab_2.Task3.csproj",
+      "msbuildProject": "../Lab_2.Task3/Lab_2.Task3.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "Lab_2.Task2 >= 1.0.0"
+      "Lab_2.Task2 >= 1.0.0",
+      "Lab_2.Task3 >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -61,6 +77,9 @@
           "projectReferences": {
             "C:\\Users\\Alex\\OneDrive\\Desktop\\University\\OOP\\Labs\\OOP-Course\\Lab_2\\Lab_2.Task2\\Lab_2.Task2.csproj": {
               "projectPath": "C:\\Users\\Alex\\OneDrive\\Desktop\\University\\OOP\\Labs\\OOP-Course\\Lab_2\\Lab_2.Task2\\Lab_2.Task2.csproj"
+            },
+            "C:\\Users\\Alex\\OneDrive\\Desktop\\University\\OOP\\Labs\\OOP-Course\\Lab_2\\Lab_2.Task3\\Lab_2.Task3.csproj": {
+              "projectPath": "C:\\Users\\Alex\\OneDrive\\Desktop\\University\\OOP\\Labs\\OOP-Course\\Lab_2\\Lab_2.Task3\\Lab_2.Task3.csproj"
             }
           }
         }
