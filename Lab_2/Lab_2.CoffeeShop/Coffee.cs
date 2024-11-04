@@ -27,4 +27,12 @@ public class Coffee
     ///     Gets the name of the coffee.
     /// </summary>
     public string Name => _name;
+
+    /// <summary>
+    ///     Prints the details of the coffee.
+    /// </summary>
+    public virtual void PrintDetails()
+    {
+        Console.WriteLine($"Coffee intensity: {CoffeeIntensity}");
+    }
 }
