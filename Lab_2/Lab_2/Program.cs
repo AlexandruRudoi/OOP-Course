@@ -32,7 +32,7 @@ internal class Program
 
             var coffeeType = string.Empty;
             var intensity = Intensity.NORMAL;
-            int? mlOfMilk = null;
+            int? mlOfLiquid = null;
             int? mgOfPumpkinSpice = null;
             SyrupType? syrupType = null;
 
@@ -40,25 +40,26 @@ internal class Program
             {
                 case "1":
                     coffeeType = "Cappuccino";
-                    mlOfMilk = GetMilkAmount();
+                    mlOfLiquid = GetLiquidAmount("milk");
                     intensity = GetIntensity();
                     break;
 
                 case "2":
                     coffeeType = "PumpkinSpiceLatte";
-                    mlOfMilk = GetMilkAmount();
+                    mlOfLiquid = GetLiquidAmount("milk");
                     mgOfPumpkinSpice = GetPumpkinSpiceAmount();
                     intensity = GetIntensity();
                     break;
 
                 case "3":
                     coffeeType = "Americano";
+                    mlOfLiquid = GetLiquidAmount("water");
                     intensity = GetIntensity();
                     break;
 
                 case "4":
                     coffeeType = "SyrupCappuccino";
-                    mlOfMilk = GetMilkAmount();
+                    mlOfLiquid = GetLiquidAmount("milk");
                     syrupType = GetSyrupType();
                     intensity = GetIntensity();
                     break;
@@ -74,7 +75,7 @@ internal class Program
 
             if (!string.IsNullOrEmpty(coffeeType))
             {
-                orders.Add((coffeeType, intensity, mlOfMilk, mgOfPumpkinSpice, syrupType));
+                orders.Add((coffeeType, intensity, mlOfLiquid, mgOfPumpkinSpice, syrupType));
                 Console.WriteLine($"{coffeeType} added to your order!\n");
             }
         }
@@ -106,15 +107,15 @@ internal class Program
     }
 
     /// <summary>
-    ///     Prompts the user to enter the amount of milk in milliliters.
+    ///     Prompts the user to enter the amount of liquid in milliliters.
     /// </summary>
     /// <returns>The amount of milk in milliliters as an integer.</returns>
-    private static int GetMilkAmount()
+    private static int GetLiquidAmount(string type)
     {
-        Console.Write("Enter amount of milk in ml: ");
-        if (int.TryParse(Console.ReadLine(), out var mlOfMilk)) return mlOfMilk;
+        Console.Write($"Enter amount of {type} in ml: ");
+        if (int.TryParse(Console.ReadLine(), out var mlOfLiquid)) return mlOfLiquid;
 
-        Console.WriteLine("Invalid input. Setting milk to 50 ml by default.");
+        Console.WriteLine($"Invalid input. Setting {type} to 50 ml by default.");
         return 50; // Default value
     }
 

@@ -55,11 +55,9 @@ internal class SyrupCappuccino : Coffee
     /// <summary>
     ///     Method to make Syrup Cappuccino, providing specific steps.
     /// </summary>
-    public sealed override void MakeCoffee()
+    private void MakeCoffee()
     {
-        Console.WriteLine($"Making {CoffeeName}");
-        Console.WriteLine($"Intensity set to {CoffeeIntensity}");
-        Console.WriteLine($"Adding {MlOfMilk} mls of milk");
+        base.MakeCoffee(CoffeeName, mlOfMilk: MlOfMilk);
         Console.WriteLine($"Adding {Syrup} syrup");
     }
 

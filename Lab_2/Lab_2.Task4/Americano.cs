@@ -39,22 +39,12 @@ internal class Americano : Coffee
     }
 
     /// <summary>
-    ///     Method to make Americano, providing specific steps.
-    /// </summary>
-    public sealed override void MakeCoffee()
-    {
-        Console.WriteLine($"Making {CoffeeName}");
-        Console.WriteLine($"Intensity set to {CoffeeIntensity}");
-        Console.WriteLine($"Adding {MlOfWater} mls of water");
-    }
-
-    /// <summary>
     ///     Factory method to make and return an Americano instance.
     /// </summary>
     public static Americano MakeAmericano(Intensity intensity, int mlOfWater)
     {
-        var americano = new Americano(intensity, mlOfWater);
-        americano.MakeCoffee();
+        var americano = new Americano(intensity, mlOfWater: mlOfWater);
+        americano.MakeCoffee(_coffeeName, mlOfWater: mlOfWater);
         return americano;
     }
 }

@@ -55,11 +55,9 @@ public class PumpkinSpiceLatte : Coffee
     /// <summary>
     ///     Method to make Pumpkin Spice Latte, providing specific steps.
     /// </summary>
-    public sealed override void MakeCoffee()
+    private void MakeCoffee()
     {
-        Console.WriteLine($"Making {CoffeeName}");
-        Console.WriteLine($"Intensity set to {CoffeeIntensity}");
-        Console.WriteLine($"Adding {MlOfMilk} mls of milk");
+        base.MakeCoffee(CoffeeName, mlOfMilk: MlOfMilk);
         Console.WriteLine($"Adding {MgOfPumpkinSpice} mls of pumpkin spice");
     }
 

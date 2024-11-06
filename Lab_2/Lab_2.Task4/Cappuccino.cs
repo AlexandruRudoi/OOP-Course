@@ -39,22 +39,12 @@ internal class Cappuccino : Coffee
     }
 
     /// <summary>
-    ///     Method to make Cappuccino, providing specific steps.
-    /// </summary>
-    public sealed override void MakeCoffee()
-    {
-        Console.WriteLine($"Making {CoffeeName}");
-        Console.WriteLine($"Intensity set to {CoffeeIntensity}");
-        Console.WriteLine($"Adding {MlOfMilk} mls of milk");
-    }
-
-    /// <summary>
     ///     Factory method to make and return a Cappuccino instance.
     /// </summary>
     public static Cappuccino MakeCappuccino(Intensity intensity, int mlOfMilk)
     {
         var cappuccino = new Cappuccino(intensity, mlOfMilk);
-        cappuccino.MakeCoffee();
+        cappuccino.MakeCoffee(_coffeeName, mlOfMilk: mlOfMilk);
         return cappuccino;
     }
 }
