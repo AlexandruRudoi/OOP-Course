@@ -3,14 +3,14 @@
 internal class Cappuccino : Coffee
 {
     private int _mlOfMilk;
-    private const string _coffeeName = "Cappuccino";
+    private const string CoffeeName = "Cappuccino";
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="Cappuccino" /> class with the specified intensity and milk amount.
     /// </summary>
     /// <param name="intensity">The intensity level of the cappuccino.</param>
     /// <param name="mlOfMilk">The amount of milk in milliliters.</param>
-    public Cappuccino(Intensity intensity, int mlOfMilk) : base(intensity)
+    public Cappuccino(Intensity intensity, int mlOfMilk) : base(intensity, CoffeeName)
     {
         MlOfMilk = mlOfMilk;
     }
@@ -23,11 +23,6 @@ internal class Cappuccino : Coffee
         get { return _mlOfMilk; }
         set { _mlOfMilk = value; }
     }
-
-    /// <summary>
-    ///     Gets the name of the cappuccino.
-    /// </summary>
-    public string CoffeeName => _coffeeName;
 
     /// <summary>
     ///     Prints the details of the cappuccino.
@@ -44,7 +39,8 @@ internal class Cappuccino : Coffee
     public static Cappuccino MakeCappuccino(Intensity intensity, int mlOfMilk)
     {
         var cappuccino = new Cappuccino(intensity, mlOfMilk);
-        cappuccino.MakeCoffee(_coffeeName, mlOfMilk: mlOfMilk);
+        cappuccino.MakeCoffee();
+        Console.WriteLine($"Adding {mlOfMilk} mls of milk");
         return cappuccino;
     }
 }

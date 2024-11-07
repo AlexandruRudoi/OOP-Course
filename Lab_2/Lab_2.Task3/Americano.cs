@@ -1,16 +1,16 @@
 ﻿namespace Lab_2.Task3;
 
-public class Americano : Coffee
+internal class Americano : Coffee
 {
     private int _mlOfWater;
-    private const string _coffeeName = "Americano";
+    private const string CoffeeName = "Americano";
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="Americano" /> class with the specified intensity and water amount.
     /// </summary>
     /// <param name="intensity">The intensity level of the Americano.</param>
     /// <param name="mlOfWater">The amount of water in milliliters.</param>
-    public Americano(Intensity intensity, int mlOfWater) : base(intensity)
+    public Americano(Intensity intensity, int mlOfWater) : base(intensity, CoffeeName)
     {
         MlOfWater = mlOfWater;
     }
@@ -27,7 +27,7 @@ public class Americano : Coffee
     /// <summary>
     ///     Gets the name of the Americano.
     /// </summary>
-    public string CoffeeName => _coffeeName;
+    public string Name => CoffeeName;
 
     /// <summary>
     ///     Prints the details of the Americano.
@@ -44,7 +44,8 @@ public class Americano : Coffee
     public static Americano MakeAmericano(Intensity intensity, int mlOfWater)
     {
         var americano = new Americano(intensity, mlOfWater: mlOfWater);
-        americano.MakeCoffee(_coffeeName, mlOfWater: mlOfWater);
+        americano.MakeCoffee();
+        Console.WriteLine($"Adding {mlOfWater} mls of water");
         return americano;
     }
 }

@@ -1,10 +1,10 @@
 ﻿namespace Lab_2.Task3;
 
-public class SyrupCappuccino : Coffee
+internal class SyrupCappuccino : Coffee
 {
     private int _mlOfMilk;
     private SyrupType _syrup;
-    private const string _coffeeName = "SyrupCappuccino";
+    private const string CoffeeName = "SyrupCappuccino";
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="SyrupCappuccino" /> class with the specified intensity, milk, and
@@ -13,7 +13,7 @@ public class SyrupCappuccino : Coffee
     /// <param name="intensity">The intensity level of the syrup cappuccino.</param>
     /// <param name="mlOfMilk">The amount of milk in milliliters.</param>
     /// <param name="syrup">The type of syrup added to the cappuccino.</param>
-    public SyrupCappuccino(Intensity intensity, int mlOfMilk, SyrupType syrup) : base(intensity)
+    public SyrupCappuccino(Intensity intensity, int mlOfMilk, SyrupType syrup) : base(intensity, CoffeeName)
     {
         MlOfMilk = mlOfMilk;
         Syrup = syrup;
@@ -38,11 +38,6 @@ public class SyrupCappuccino : Coffee
     }
 
     /// <summary>
-    ///     Gets the name of the syrup cappuccino.
-    /// </summary>
-    public string CoffeeName => _coffeeName;
-
-    /// <summary>
     ///     Prints the details of the Syrup Cappuccino.
     /// </summary>
     public override void PrintDetails()
@@ -53,21 +48,14 @@ public class SyrupCappuccino : Coffee
     }
 
     /// <summary>
-    ///     Method to make Syrup Cappuccino, providing specific steps.
-    /// </summary>
-    private void MakeCoffee()
-    {
-        base.MakeCoffee(CoffeeName, mlOfMilk: MlOfMilk);
-        Console.WriteLine($"Adding {Syrup} syrup");
-    }
-
-    /// <summary>
     ///     Factory method to make and return a Syrup Cappuccino instance.
     /// </summary>
     public static SyrupCappuccino MakeSyrupCappuccino(Intensity intensity, int mlOfMilk, SyrupType syrup)
     {
         var syrupCappuccino = new SyrupCappuccino(intensity, mlOfMilk, syrup);
         syrupCappuccino.MakeCoffee();
+        Console.WriteLine($"Adding {mlOfMilk} mls of milk");
+        Console.WriteLine($"Adding {syrup} syrup");
         return syrupCappuccino;
     }
 }
