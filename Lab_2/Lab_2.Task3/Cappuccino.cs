@@ -1,6 +1,6 @@
 ﻿namespace Lab_2.Task3;
 
-internal class Cappuccino : Coffee
+public class Cappuccino : Coffee
 {
     private int _mlOfMilk;
     private const string CoffeeName = "Cappuccino";

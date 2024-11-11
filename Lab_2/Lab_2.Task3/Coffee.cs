@@ -1,6 +1,6 @@
 ﻿namespace Lab_2.Task3;
 
-internal class Coffee
+public class Coffee
 {
     private Intensity _coffeeIntensity;
     private readonly string _name = "Coffee";

@@ -1,6 +1,6 @@
 ﻿namespace Lab_2.Task3;
 
-internal class SyrupCappuccino : Coffee
+public class SyrupCappuccino : Coffee
 {
     private int _mlOfMilk;
     private SyrupType _syrup;

@@ -1,6 +1,6 @@
 ﻿namespace Lab_2.Task3;
 
-internal class PumpkinSpiceLatte : Coffee
+public class PumpkinSpiceLatte : Coffee
 {
     private int _mlOfMilk;
     private int _mgOfPumpkinSpice;
