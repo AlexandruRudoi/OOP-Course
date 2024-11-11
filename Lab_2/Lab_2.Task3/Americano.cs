@@ -10,7 +10,7 @@ public class Americano : Coffee
     /// </summary>
     /// <param name="intensity">The intensity level of the Americano.</param>
     /// <param name="mlOfWater">The amount of water in milliliters.</param>
-    public Americano(Intensity intensity, int mlOfWater) : base(intensity, CoffeeName)
+    public Americano(Intensity intensity, int mlOfWater) : base(intensity)
     {
         MlOfWater = mlOfWater;
     }
@@ -27,7 +27,7 @@ public class Americano : Coffee
     /// <summary>
     ///     Gets the name of the Americano.
     /// </summary>
-    public string Name => CoffeeName;
+    public override string Name => CoffeeName;
 
     /// <summary>
     ///     Prints the details of the Americano.
@@ -39,13 +39,20 @@ public class Americano : Coffee
     }
 
     /// <summary>
+    ///     Prints the details of making an americano.
+    /// </summary>
+    protected override void MakeReceipe()
+    {
+        base.MakeReceipe();
+        Console.WriteLine($"Adding {MlOfWater} mls of water");
+    }
+
+    /// <summary>
     ///     Factory method to make and return an Americano instance.
     /// </summary>
-    public static Americano MakeAmericano(Intensity intensity, int mlOfWater)
+    public Americano MakeAmericano()
     {
-        var americano = new Americano(intensity, mlOfWater: mlOfWater);
-        americano.MakeCoffee();
-        Console.WriteLine($"Adding {mlOfWater} mls of water");
-        return americano;
+        MakeReceipe();
+        return this;
     }
 }

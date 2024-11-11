@@ -1,6 +1,6 @@
 ﻿namespace Lab_2.Task3;
 
-public class PumpkinSpiceLatte : Coffee
+public class PumpkinSpiceLatte : Cappuccino
 {
     private int _mlOfMilk;
     private int _mgOfPumpkinSpice;
@@ -13,7 +13,7 @@ public class PumpkinSpiceLatte : Coffee
     /// <param name="intensity">The intensity level of the latte.</param>
     /// <param name="mlOfMilk">The amount of milk in milliliters.</param>
     /// <param name="mgOfPumpkinSpice">The amount of pumpkin spice in milligrams.</param>
-    public PumpkinSpiceLatte(Intensity intensity, int mlOfMilk, int mgOfPumpkinSpice) : base(intensity, CoffeeName)
+    public PumpkinSpiceLatte(Intensity intensity, int mlOfMilk, int mgOfPumpkinSpice) : base(intensity, mlOfMilk)
     {
         MlOfMilk = mlOfMilk;
         MgOfPumpkinSpice = mgOfPumpkinSpice;
@@ -22,11 +22,16 @@ public class PumpkinSpiceLatte : Coffee
     /// <summary>
     ///     Gets or sets the amount of milk in the latte.
     /// </summary>
-    public int MlOfMilk
+    public override int MlOfMilk
     {
         get { return _mlOfMilk; }
         set { _mlOfMilk = value; }
     }
+
+    /// <summary>
+    ///     Gets the name of the coffee.
+    /// </summary>
+    public override string Name => CoffeeName;
 
     /// <summary>
     ///     Gets or sets the amount of pumpkin spice in the latte.
@@ -46,16 +51,22 @@ public class PumpkinSpiceLatte : Coffee
         Console.WriteLine($"Pumpkin Spice Latte milk: {MlOfMilk} mg");
         Console.WriteLine($"Pumpkin spice: {MgOfPumpkinSpice} mg");
     }
+    
+    /// <summary>
+    ///     Prints the details of making a pumpkinSpiceLatte.
+    /// </summary>
+    protected override void MakeReceipe()
+    {
+        base.MakeReceipe();
+        Console.WriteLine($"Adding {MgOfPumpkinSpice} mls of pumpkin spice");
+    }
 
     /// <summary>
     ///     Factory method to make and return a Pumpkin Spice Latte instance.
     /// </summary>
-    public static PumpkinSpiceLatte MakePumpkinSpiceLatte(Intensity intensity, int mlOfMilk, int mgOfPumpkinSpice)
+    public PumpkinSpiceLatte MakePumpkinSpiceLatte()
     {
-        var pumpkinLatte = new PumpkinSpiceLatte(intensity, mlOfMilk, mgOfPumpkinSpice);
-        pumpkinLatte.MakeCoffee();
-        Console.WriteLine($"Adding {mlOfMilk} mls of milk");
-        Console.WriteLine($"Adding {mgOfPumpkinSpice} mls of pumpkin spice");
-        return pumpkinLatte;
+        MakeReceipe();
+        return this;
     }
 }

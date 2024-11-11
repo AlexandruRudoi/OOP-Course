@@ -13,24 +13,28 @@ public class Barista
             switch (order.CoffeeType.ToLower())
             {
                 case "cappuccino":
-                    var cappuccino = Cappuccino.MakeCappuccino(order.Intensity, order.MlOfLiquid ?? 0);
+                    var cappucino = new Cappuccino(order.Intensity, order.MlOfLiquid ?? 0);
+                    cappucino.MakeCappuccino();
                     Console.WriteLine();
                     break;
 
                 case "pumpkinspicelatte":
-                    var pumpkinLatte = PumpkinSpiceLatte.MakePumpkinSpiceLatte(order.Intensity, order.MlOfLiquid ?? 0,
+                    var pumpkinLatte = new PumpkinSpiceLatte(order.Intensity, order.MlOfLiquid ?? 0,
                         order.MgOfPumpkinSpice ?? 0);
+                    pumpkinLatte.MakePumpkinSpiceLatte();
                     Console.WriteLine();
                     break;
 
                 case "americano":
-                    var americano = Americano.MakeAmericano(order.Intensity, order.MlOfLiquid ?? 0);
+                    var americano = new Americano(order.Intensity, order.MlOfLiquid ?? 0);
+                    americano.MakeAmericano();
                     Console.WriteLine();
                     break;
 
                 case "syrupcappuccino":
-                    var syrupCappuccino = SyrupCappuccino.MakeSyrupCappuccino(order.Intensity, order.MlOfLiquid ?? 0,
+                    var syrupCappuccino = new SyrupCappuccino(order.Intensity, order.MlOfLiquid ?? 0,
                         order.Syrup ?? SyrupType.CARAMEL);
+                    syrupCappuccino.MakeSyrupCappuccino();
                     Console.WriteLine();
                     break;
 

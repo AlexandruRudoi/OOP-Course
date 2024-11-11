@@ -10,7 +10,7 @@ internal class Cappuccino : Coffee
     /// </summary>
     /// <param name="intensity">The intensity level of the cappuccino.</param>
     /// <param name="mlOfMilk">The amount of milk in milliliters.</param>
-    public Cappuccino(Intensity intensity, int mlOfMilk) : base(intensity, CoffeeName)
+    public Cappuccino(Intensity intensity, int mlOfMilk) : base(intensity)
     {
         MlOfMilk = mlOfMilk;
     }
@@ -18,11 +18,16 @@ internal class Cappuccino : Coffee
     /// <summary>
     ///     Gets or sets the amount of milk in the cappuccino.
     /// </summary>
-    public int MlOfMilk
+    public virtual int MlOfMilk
     {
         get { return _mlOfMilk; }
         set { _mlOfMilk = value; }
     }
+
+    /// <summary>
+    ///     Gets the name of the coffee.
+    /// </summary>
+    public override string Name => CoffeeName;
 
     /// <summary>
     ///     Prints the details of the cappuccino.
@@ -34,13 +39,20 @@ internal class Cappuccino : Coffee
     }
 
     /// <summary>
+    ///     Prints the details of making a cappuccino.
+    /// </summary>
+    protected override void MakeReceipe()
+    {
+        base.MakeReceipe();
+        Console.WriteLine($"Adding {MlOfMilk} mls of milk");
+    }
+
+    /// <summary>
     ///     Factory method to make and return a Cappuccino instance.
     /// </summary>
-    public static Cappuccino MakeCappuccino(Intensity intensity, int mlOfMilk)
+    public Cappuccino MakeCappuccino()
     {
-        var cappuccino = new Cappuccino(intensity, mlOfMilk);
-        cappuccino.MakeCoffee();
-        Console.WriteLine($"Adding {mlOfMilk} mls of milk");
-        return cappuccino;
+        MakeReceipe();
+        return this;
     }
 }

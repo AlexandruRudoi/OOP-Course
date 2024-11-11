@@ -3,17 +3,16 @@
 public class Coffee
 {
     private Intensity _coffeeIntensity;
-    private readonly string _name = "Coffee";
+    private const string _name = "Coffee";
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="Coffee" /> class with the specified intensity.
     /// </summary>
     /// <param name="intensity">The intensity level of the coffee.</param>
     /// <param name="name">The name of the coffee.</param>
-    public Coffee(Intensity intensity, string name)
+    public Coffee(Intensity intensity)
     {
         CoffeeIntensity = intensity;
-        this._name = name;
     }
 
     /// <summary>
@@ -28,7 +27,7 @@ public class Coffee
     /// <summary>
     ///     Gets the name of the coffee.
     /// </summary>
-    public string Name => _name;
+    public virtual string Name => _name;
 
     /// <summary>
     ///     Prints the details of the coffee.
@@ -41,9 +40,18 @@ public class Coffee
     /// <summary>
     ///     Prints the details of making a coffee. This can be overridden in derived classes.
     /// </summary>
-    protected void MakeCoffee()
+    protected virtual void MakeReceipe()
     {
         Console.WriteLine($"Making {Name}");
         Console.WriteLine($"Intensity set to {CoffeeIntensity}");
+    }
+
+    /// <summary>
+    ///     Prints the details of making a coffee.
+    /// </summary>
+    public Coffee MakeCoffee()
+    {
+        MakeReceipe();
+        return this;
     }
 }

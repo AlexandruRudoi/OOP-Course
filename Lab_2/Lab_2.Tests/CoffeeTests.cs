@@ -12,7 +12,8 @@ public class CoffeeTests
         using (var sw = new StringWriter())
         {
             Console.SetOut(sw);
-            var cappuccino = Cappuccino.MakeCappuccino(Intensity.NORMAL, 50);
+            var cappuccino = new Cappuccino(Intensity.NORMAL, 50);
+            cappuccino.MakeCappuccino();
 
             // Assert
             var result = sw.ToString();
@@ -29,7 +30,8 @@ public class CoffeeTests
         using (var sw = new StringWriter())
         {
             Console.SetOut(sw);
-            var pumpkinLatte = PumpkinSpiceLatte.MakePumpkinSpiceLatte(Intensity.STRONG, 100, 10);
+            var pumpkinLatte = new PumpkinSpiceLatte(Intensity.STRONG, 100, 10);
+            pumpkinLatte.MakePumpkinSpiceLatte();
 
             // Assert
             var result = sw.ToString();
@@ -47,7 +49,8 @@ public class CoffeeTests
         using (var sw = new StringWriter())
         {
             Console.SetOut(sw);
-            var americano = Americano.MakeAmericano(Intensity.LIGHT, 200);
+            var americano = new Americano(Intensity.LIGHT, 200);
+            americano.MakeAmericano();
 
             // Assert
             var result = sw.ToString();
@@ -64,7 +67,8 @@ public class CoffeeTests
         using (var sw = new StringWriter())
         {
             Console.SetOut(sw);
-            var syrupCappuccino = SyrupCappuccino.MakeSyrupCappuccino(Intensity.NORMAL, 150, SyrupType.CHOCOLATE);
+            var syrupCappuccino = new SyrupCappuccino(Intensity.NORMAL, 150, SyrupType.CHOCOLATE);
+            syrupCappuccino.MakeSyrupCappuccino();
 
             // Assert
             var result = sw.ToString();
