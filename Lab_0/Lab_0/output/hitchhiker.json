@@ -1,0 +1,35 @@
+{
+  "name": "hitchHiker",
+  "individuals": [
+    {
+      "Id": 3,
+      "IsHumanoid": true,
+      "Planet": "Betelgeuse",
+      "Age": 59,
+      "Traits": [
+        "EXTRA_ARMS",
+        "EXTRA_HEAD"
+      ]
+    },
+    {
+      "Id": 4,
+      "IsHumanoid": false,
+      "Planet": "Vogsphere",
+      "Age": 128,
+      "Traits": [
+        "GREEN",
+        "BULKY"
+      ]
+    },
+    {
+      "Id": 10,
+      "IsHumanoid": null,
+      "Planet": "Betelgeuse",
+      "Age": 45,
+      "Traits": [
+        "EXTRA_ARMS",
+        "EXTRA_HEAD"
+      ]
+    }
+  ]
+}
