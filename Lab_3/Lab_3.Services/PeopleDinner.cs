@@ -6,6 +6,7 @@ public class PeopleDinner : IDineable
 {
     private static int _peopleServed = 0;
 
+    /// <inheritdoc/>
     public void ServeDinner(string carId)
     {
         _peopleServed++;

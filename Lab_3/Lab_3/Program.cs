@@ -10,7 +10,7 @@ class Program
     static void Main(string[] args)
     {
         var electricStation = new CarStation(new PeopleDinner(), new RobotDinner(), new ElectricStation(),
-            new ArrayQueue<Car>());
+            new LinkedListQueue<Car>());
         var gasStation = new CarStation(new PeopleDinner(), new RobotDinner(), new GasStation(), new ArrayQueue<Car>());
 
         var semaphore = new Semaphore(electricStation, gasStation);

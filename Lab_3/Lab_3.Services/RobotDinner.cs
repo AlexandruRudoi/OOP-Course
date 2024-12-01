@@ -6,6 +6,7 @@ public class RobotDinner : IDineable
 {
     private static int _robotsServed = 0;
 
+    /// <inheritdoc/>
     public void ServeDinner(string carId)
     {
         _robotsServed++;

@@ -12,7 +12,7 @@ namespace Lab_3.Tests
         private Semaphore _semaphore;
         private CarStation _electricCarStation;
         private CarStation _gasCarStation;
-        private ArrayQueue<Car> _electricQueue;
+        private LinkedListQueue<Car> _electricQueue;
         private ArrayQueue<Car> _gasQueue;
         private Mock<IDineable> _mockPeopleDiningService;
         private Mock<IDineable> _mockRobotDiningService;
@@ -29,7 +29,7 @@ namespace Lab_3.Tests
             _mockGasRefuelingService = new Mock<IRefuelable>();
 
             // Create queues
-            _electricQueue = new ArrayQueue<Car>();
+            _electricQueue = new LinkedListQueue<Car>();
             _gasQueue = new ArrayQueue<Car>();
 
             // Create car stations

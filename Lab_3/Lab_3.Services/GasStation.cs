@@ -6,6 +6,7 @@ public class GasStation : IRefuelable
 {
     private static int _gasCarsServed = 0;
 
+    /// <inheritdoc/>
     public void Refuel(string carId)
     {
         _gasCarsServed++;

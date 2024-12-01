@@ -11,6 +11,13 @@ namespace Lab_3.Services
         private readonly int _serveIntervalSeconds;
         private readonly object _lockObject = new();
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="Scheduler"/> class.
+        /// </summary>
+        /// <param name="semaphore">The semaphore to manage car stations.</param>
+        /// <param name="queueFolderPath">The path to the folder containing car JSON files.</param>
+        /// <param name="readIntervalSeconds">The interval (in seconds) for reading cars.</param>
+        /// <param name="serveIntervalSeconds">The interval (in seconds) for serving cars.</param>
         public Scheduler(Semaphore semaphore, string queueFolderPath, int readIntervalSeconds, int serveIntervalSeconds)
         {
             _semaphore = semaphore;
@@ -19,6 +26,9 @@ namespace Lab_3.Services
             _serveIntervalSeconds = serveIntervalSeconds;
         }
 
+        /// <summary>
+        ///     Starts the scheduler by running tasks for reading and serving cars.
+        /// </summary>
         public void Start()
         {
             // Start reader and server tasks
@@ -32,6 +42,10 @@ namespace Lab_3.Services
             serverThread.Join();
         }
 
+        /// <summary>
+        ///     Reads car data from the queue folder at regular intervals and dispatches the cars to the appropriate
+        ///     car stations using the semaphore.
+        /// </summary>
         private void ReadFromQueueFolder()
         {
             while (true)
@@ -57,6 +71,9 @@ namespace Lab_3.Services
             }
         }
 
+        /// <summary>
+        ///     Serves cars from the car stations at regular intervals by invoking the semaphore's ServeAllCars method.
+        /// </summary>
         private void ServeCars()
         {
             while (true)

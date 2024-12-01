@@ -6,11 +6,13 @@ public class ArrayQueue<T> : IQueue<T>
 {
     private readonly List<T> _items = new List<T>();
 
+    /// <inheritdoc/>
     public void Enqueue(T item)
     {
         _items.Add(item);
     }
 
+    /// <inheritdoc/>
     public T Dequeue()
     {
         if (IsEmpty())
@@ -20,6 +22,7 @@ public class ArrayQueue<T> : IQueue<T>
         return item;
     }
 
+    /// <inheritdoc/>
     public T Peek()
     {
         if (IsEmpty())
@@ -27,10 +30,12 @@ public class ArrayQueue<T> : IQueue<T>
         return _items[0];
     }
 
+    /// <inheritdoc/>
     public bool IsEmpty()
     {
         return _items.Count == 0;
     }
 
+    /// <inheritdoc/>
     public int Count => _items.Count;
 }

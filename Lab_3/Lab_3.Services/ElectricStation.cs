@@ -6,6 +6,7 @@ public class ElectricStation : IRefuelable
 {
     private static int _electricCarsServed = 0;
 
+    /// <inheritdoc/>
     public void Refuel(string carId)
     {
         _electricCarsServed++;
