@@ -7,4 +7,10 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Lab_3.Domain\Lab_3.Domain.csproj" />
+      <ProjectReference Include="..\Lab_3.Repositories\Lab_3.Repositories.csproj" />
+      <ProjectReference Include="..\Lab_3.Services\Lab_3.Services.csproj" />
+    </ItemGroup>
+
 </Project>

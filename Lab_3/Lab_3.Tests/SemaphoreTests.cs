@@ -14,7 +14,8 @@ namespace Lab_3.Tests
         private CarStation _gasCarStation;
         private ArrayQueue<Car> _electricQueue;
         private ArrayQueue<Car> _gasQueue;
-        private Mock<IDineable> _mockDiningService;
+        private Mock<IDineable> _mockPeopleDiningService;
+        private Mock<IDineable> _mockRobotDiningService;
         private Mock<IRefuelable> _mockElectricRefuelingService;
         private Mock<IRefuelable> _mockGasRefuelingService;
 
@@ -22,7 +23,8 @@ namespace Lab_3.Tests
         public void Setup()
         {
             // Mock dependencies
-            _mockDiningService = new Mock<IDineable>();
+            _mockPeopleDiningService = new Mock<IDineable>();
+            _mockRobotDiningService = new Mock<IDineable>();
             _mockElectricRefuelingService = new Mock<IRefuelable>();
             _mockGasRefuelingService = new Mock<IRefuelable>();
 
@@ -31,16 +33,26 @@ namespace Lab_3.Tests
             _gasQueue = new ArrayQueue<Car>();
 
             // Create car stations
-            _electricCarStation = new CarStation(_mockDiningService.Object, _mockElectricRefuelingService.Object,
-                _electricQueue);
-            _gasCarStation = new CarStation(_mockDiningService.Object, _mockGasRefuelingService.Object, _gasQueue);
+            _electricCarStation = new CarStation(
+                _mockPeopleDiningService.Object,
+                _mockRobotDiningService.Object,
+                _mockElectricRefuelingService.Object,
+                _electricQueue
+            );
+
+            _gasCarStation = new CarStation(
+                _mockPeopleDiningService.Object,
+                _mockRobotDiningService.Object,
+                _mockGasRefuelingService.Object,
+                _gasQueue
+            );
 
             // Create semaphore
             _semaphore = new Semaphore(_electricCarStation, _gasCarStation);
         }
 
         [Test]
-        public void DispatchCar_FromJson_ElectricCarAddedToElectricStation()
+        public void DispatchCar_ElectricCar_AddedToElectricStation()
         {
             var json =
                 "{\"id\": 5, \"type\": \"ELECTRIC\", \"passengers\": \"PEOPLE\", \"isDining\": false, \"consumption\": 49}";
@@ -53,7 +65,7 @@ namespace Lab_3.Tests
         }
 
         [Test]
-        public void DispatchCar_FromJson_GasCarAddedToGasStation()
+        public void DispatchCar_GasCar_AddedToGasStation()
         {
             var json =
                 "{\"id\": 2, \"type\": \"GAS\", \"passengers\": \"ROBOTS\", \"isDining\": true, \"consumption\": 42}";
@@ -66,7 +78,7 @@ namespace Lab_3.Tests
         }
 
         [Test]
-        public void ServeAllCars_FromJson_MultipleCarsCorrectlyServed()
+        public void ServeAllCars_MultipleCars_AllServedCorrectly()
         {
             var carJsons = new[]
             {
@@ -92,9 +104,8 @@ namespace Lab_3.Tests
         }
 
         [Test]
-        public void ServeAllCars_FromJson_StatisticsAreCorrect()
+        public void ServeAllCars_Statistics_CorrectServicesCalled()
         {
-            // Arrange
             var carJsons = new[]
             {
                 "{\"id\": 1, \"type\": \"GAS\", \"passengers\": \"PEOPLE\", \"isDining\": true, \"consumption\": 20}",
@@ -111,9 +122,13 @@ namespace Lab_3.Tests
 
             _semaphore.ServeAllCars();
 
+            // Verify refueling
             _mockElectricRefuelingService.Verify(r => r.Refuel(It.IsAny<string>()), Times.Exactly(2));
             _mockGasRefuelingService.Verify(r => r.Refuel(It.IsAny<string>()), Times.Exactly(2));
-            _mockDiningService.Verify(d => d.ServeDinner(It.IsAny<string>()), Times.Once);
+
+            // Verify dining
+            _mockPeopleDiningService.Verify(d => d.ServeDinner(It.Is<string>(id => id == "1")), Times.Once);
+            _mockRobotDiningService.Verify(d => d.ServeDinner(It.IsAny<string>()), Times.Never);
         }
     }
 }
