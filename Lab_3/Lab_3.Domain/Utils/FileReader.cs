@@ -13,24 +13,17 @@ public static class FileReader
 
         try
         {
-            if (!Directory.Exists(folderPath))
-            {
-                throw new DirectoryNotFoundException($"Folder not found: {folderPath}");
-            }
+            if (!Directory.Exists(folderPath)) throw new DirectoryNotFoundException($"Folder not found: {folderPath}");
 
             var files = Directory.GetFiles(folderPath, "*.json");
 
             foreach (var file in files)
-            {
                 try
                 {
                     var jsonContent = File.ReadAllText(file);
                     var car = CarParser.ParseFromJson(jsonContent);
 
-                    if (car != null)
-                    {
-                        cars.Add(car);
-                    }
+                    if (car != null) cars.Add(car);
 
                     File.Delete(file); // Clean up after processing
                 }
@@ -38,7 +31,6 @@ public static class FileReader
                 {
                     Console.WriteLine($"Error reading or converting file {file}: {ex.Message}");
                 }
-            }
         }
         catch (Exception ex)
         {

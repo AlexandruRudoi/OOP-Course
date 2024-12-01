@@ -19,10 +19,10 @@ public class LinkedListQueue<T> : IQueue<T>
     private Node _tail;
     private int _count;
 
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public void Enqueue(T item)
     {
-        Node newNode = new Node(item);
+        var newNode = new Node(item);
         if (_tail != null)
             _tail.Next = newNode;
         _tail = newNode;
@@ -31,12 +31,12 @@ public class LinkedListQueue<T> : IQueue<T>
         _count++;
     }
 
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public T Dequeue()
     {
         if (IsEmpty())
             throw new InvalidOperationException("Queue is empty");
-        T value = _head.Value;
+        var value = _head.Value;
         _head = _head.Next;
         if (_head == null)
             _tail = null;
@@ -44,7 +44,7 @@ public class LinkedListQueue<T> : IQueue<T>
         return value;
     }
 
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public T Peek()
     {
         if (IsEmpty())
@@ -52,7 +52,7 @@ public class LinkedListQueue<T> : IQueue<T>
         return _head.Value;
     }
 
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public bool IsEmpty()
     {
         return _head == null;

@@ -10,7 +10,7 @@ public class CarStation
     private readonly IQueue<Car> _queue;
     
     /// <summary>
-    ///     Initializes a new instance of the <see cref="CarStation"/> class.
+    ///     Initializes a new instance of the <see cref="CarStation" /> class.
     /// </summary>
     /// <param name="peopleDiningService">The dining service for PEOPLE passengers.</param>
     /// <param name="robotDiningService">The dining service for ROBOTS passengers.</param>
@@ -41,22 +41,16 @@ public class CarStation
     {
         while (!_queue.IsEmpty())
         {
-            Car car = _queue.Dequeue();
+            var car = _queue.Dequeue();
 
             if (car.IsDining)
             {
                 if (car.Passengers == "PEOPLE")
-                {
                     _peopleDiningService.ServeDinner(car.Id);
-                }
                 else if (car.Passengers == "ROBOTS")
-                {
                     _robotDiningService.ServeDinner(car.Id);
-                }
                 else
-                {
                     Console.WriteLine($"Unknown passenger type {car.Passengers} for car {car.Id}");
-                }
             }
 
             _refuelingService.Refuel(car.Id);
@@ -66,5 +60,8 @@ public class CarStation
     /// <summary>
     ///     Gets the number of cars currently in the station's queue.
     /// </summary>
-    public int QueueCount() => _queue.Count;
+    public int QueueCount()
+    {
+        return _queue.Count;
+    }
 }

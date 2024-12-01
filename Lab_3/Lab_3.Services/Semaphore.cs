@@ -8,7 +8,7 @@ public class Semaphore
     private readonly CarStation _gasCarStation;
 
     /// <summary>
-    ///     Initializes a new instance of the <see cref="Semaphore"/> class.
+    ///     Initializes a new instance of the <see cref="Semaphore" /> class.
     /// </summary>
     /// <param name="electricCarStation">The car station that serves electric cars.</param>
     /// <param name="gasCarStation">The car station that serves gas cars.</param>
@@ -25,13 +25,8 @@ public class Semaphore
     public void DispatchCar(Car car)
     {
         if (car.Type == "ELECTRIC")
-        {
             _electricCarStation.AddCar(car);
-        }
-        else if (car.Type == "GAS")
-        {
-            _gasCarStation.AddCar(car);
-        }
+        else if (car.Type == "GAS") _gasCarStation.AddCar(car);
     }
 
     /// <summary>

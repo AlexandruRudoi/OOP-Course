@@ -6,12 +6,15 @@ public class RobotDinner : IDineable
 {
     private static int _robotsServed = 0;
 
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public void ServeDinner(string carId)
     {
         _robotsServed++;
         Console.WriteLine($"Serving dinner to robots in car {carId}.");
     }
 
-    public static int GetRobotsServedCount() => _robotsServed;
+    public static int GetRobotsServedCount()
+    {
+        return _robotsServed;
+    }
 }

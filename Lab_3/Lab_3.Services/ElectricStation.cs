@@ -6,12 +6,15 @@ public class ElectricStation : IRefuelable
 {
     private static int _electricCarsServed = 0;
 
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public void Refuel(string carId)
     {
         _electricCarsServed++;
         Console.WriteLine($"Refueling electric car {carId}.");
     }
 
-    public static int GetElectricCarsServedCount() => _electricCarsServed;
+    public static int GetElectricCarsServedCount()
+    {
+        return _electricCarsServed;
+    }
 }

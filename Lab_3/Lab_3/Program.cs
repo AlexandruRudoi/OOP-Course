@@ -5,9 +5,9 @@ using Semaphore = Lab_3.Services.Semaphore;
 
 namespace Lab_3;
 
-class Program
+internal class Program
 {
-    static void Main(string[] args)
+    private static void Main(string[] args)
     {
         var electricStation = new CarStation(new PeopleDinner(), new RobotDinner(), new ElectricStation(),
             new LinkedListQueue<Car>());
@@ -18,7 +18,7 @@ class Program
         // Define the queue folder path
         var queueFolderPath = args[0];
 
-        var scheduler = new Scheduler(semaphore, queueFolderPath, readIntervalSeconds: 5, serveIntervalSeconds: 10);
+        var scheduler = new Scheduler(semaphore, queueFolderPath, 5, 10);
         scheduler.Start();
     }
 }

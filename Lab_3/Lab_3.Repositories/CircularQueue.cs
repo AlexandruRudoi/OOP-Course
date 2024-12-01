@@ -14,7 +14,7 @@ public class CircularQueue<T> : IQueue<T>
         _items = new T[capacity];
     }
 
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public void Enqueue(T item)
     {
         if (_size == _items.Length)
@@ -24,7 +24,7 @@ public class CircularQueue<T> : IQueue<T>
         _size++;
     }
 
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public T Dequeue()
     {
         if (IsEmpty())
@@ -35,7 +35,7 @@ public class CircularQueue<T> : IQueue<T>
         return item;
     }
 
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public T Peek()
     {
         if (IsEmpty())
@@ -43,7 +43,7 @@ public class CircularQueue<T> : IQueue<T>
         return _items[_head];
     }
 
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public bool IsEmpty()
     {
         return _size == 0;
