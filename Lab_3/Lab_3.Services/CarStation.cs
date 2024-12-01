@@ -1,4 +1,6 @@
-﻿namespace Lab_3.Domain;
+﻿using Lab_3.Domain;
+
+namespace Lab_3.Services;
 
 public class CarStation
 {
@@ -32,4 +34,6 @@ public class CarStation
             _refuelingService.Refuel(car.Id);
         }
     }
+
+    public int QueueCount() => _queue.Count;
 }
