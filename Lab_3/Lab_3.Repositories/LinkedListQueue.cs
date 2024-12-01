@@ -1,0 +1,58 @@
+﻿using Lab_3.Domain;
+
+namespace Lab_3.Repositories;
+
+public class LinkedListQueue<T> : IQueue<T>
+{
+    private class Node
+    {
+        public T Value { get; }
+        public Node Next { get; set; }
+
+        public Node(T value)
+        {
+            Value = value;
+        }
+    }
+
+    private Node _head;
+    private Node _tail;
+    private int _count;
+
+    public void Enqueue(T item)
+    {
+        Node newNode = new Node(item);
+        if (_tail != null)
+            _tail.Next = newNode;
+        _tail = newNode;
+        if (_head == null)
+            _head = _tail;
+        _count++;
+    }
+
+    public T Dequeue()
+    {
+        if (IsEmpty())
+            throw new InvalidOperationException("Queue is empty");
+        T value = _head.Value;
+        _head = _head.Next;
+        if (_head == null)
+            _tail = null;
+        _count--;
+        return value;
+    }
+
+    public T Peek()
+    {
+        if (IsEmpty())
+            throw new InvalidOperationException("Queue is empty");
+        return _head.Value;
+    }
+
+    public bool IsEmpty()
+    {
+        return _head == null;
+    }
+
+    public int Count => _count;
+}
