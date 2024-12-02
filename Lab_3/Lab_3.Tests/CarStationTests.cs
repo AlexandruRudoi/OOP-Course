@@ -8,20 +8,17 @@ namespace Lab_3.Tests;
 public class CarStationTests
 {
     private CarStation _carStation;
-    private Mock<IDineable> _mockPeopleDiningService;
+    private Mock<IDineable> _mockDiningService;
     private Mock<IRefuelable> _mockRefuelingService;
-    private Mock<IDineable> _mockRobotDiningService;
     private ArrayQueue<Car> _queue;
 
     [SetUp]
     public void Setup()
     {
-        _mockPeopleDiningService = new Mock<IDineable>();
-        _mockRobotDiningService = new Mock<IDineable>();
+        _mockDiningService = new Mock<IDineable>();
         _mockRefuelingService = new Mock<IRefuelable>();
         _queue = new ArrayQueue<Car>();
-        _carStation = new CarStation(_mockPeopleDiningService.Object, _mockRobotDiningService.Object,
-            _mockRefuelingService.Object, _queue);
+        _carStation = new CarStation(_mockDiningService.Object, _mockRefuelingService.Object, _queue);
     }
 
     [Test]
@@ -32,8 +29,7 @@ public class CarStationTests
 
         _carStation.ServeCars();
 
-        _mockPeopleDiningService.Verify(d => d.ServeDinner("Car1"), Times.Once);
-        _mockRobotDiningService.Verify(d => d.ServeDinner(It.IsAny<string>()), Times.Never);
+        _mockDiningService.Verify(d => d.ServeDinner("Car1"), Times.Once);
         _mockRefuelingService.Verify(r => r.Refuel("Car1"), Times.Once);
         Assert.IsTrue(_queue.IsEmpty());
     }
@@ -46,11 +42,11 @@ public class CarStationTests
 
         _carStation.ServeCars();
 
-        _mockRobotDiningService.Verify(d => d.ServeDinner("Car2"), Times.Once);
-        _mockPeopleDiningService.Verify(d => d.ServeDinner(It.IsAny<string>()), Times.Never);
+        _mockDiningService.Verify(d => d.ServeDinner("Car2"), Times.Once);
         _mockRefuelingService.Verify(r => r.Refuel("Car2"), Times.Once);
         Assert.IsTrue(_queue.IsEmpty());
     }
+
 
     [Test]
     public void ServeCars_SingleCarWithRefuelingOnly_CallsRefuelingServiceOnly()
@@ -60,8 +56,7 @@ public class CarStationTests
 
         _carStation.ServeCars();
 
-        _mockPeopleDiningService.Verify(d => d.ServeDinner(It.IsAny<string>()), Times.Never);
-        _mockRobotDiningService.Verify(d => d.ServeDinner(It.IsAny<string>()), Times.Never);
+        _mockDiningService.Verify(d => d.ServeDinner(It.IsAny<string>()), Times.Never);
         _mockRefuelingService.Verify(r => r.Refuel("Car3"), Times.Once);
         Assert.IsTrue(_queue.IsEmpty());
     }
@@ -79,9 +74,9 @@ public class CarStationTests
 
         _carStation.ServeCars();
 
-        _mockPeopleDiningService.Verify(d => d.ServeDinner("Car1"), Times.Once);
-        _mockRobotDiningService.Verify(d => d.ServeDinner("Car2"), Times.Once);
-        _mockPeopleDiningService.Verify(d => d.ServeDinner(It.Is<string>(id => id == "Car3")), Times.Never);
+        _mockDiningService.Verify(d => d.ServeDinner("Car1"), Times.Once);
+        _mockDiningService.Verify(d => d.ServeDinner("Car2"), Times.Once);
+        _mockDiningService.Verify(d => d.ServeDinner(It.Is<string>(id => id == "Car3")), Times.Never);
         _mockRefuelingService.Verify(r => r.Refuel(It.IsAny<string>()), Times.Exactly(3));
         Assert.IsTrue(_queue.IsEmpty());
     }

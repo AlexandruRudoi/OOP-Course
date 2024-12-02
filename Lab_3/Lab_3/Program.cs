@@ -5,15 +5,31 @@ using Semaphore = Lab_3.Services.Semaphore;
 
 namespace Lab_3;
 
-internal class Program
-{
+    internal class Program
+    {
     private static void Main(string[] args)
     {
-        var electricStation = new CarStation(new PeopleDinner(), new RobotDinner(), new ElectricStation(),
+        var robotElectricStation = new CarStation(
+            new RobotDinner(),
+            new ElectricStation(),
             new LinkedListQueue<Car>());
-        var gasStation = new CarStation(new PeopleDinner(), new RobotDinner(), new GasStation(), new ArrayQueue<Car>());
 
-        var semaphore = new Semaphore(electricStation, gasStation);
+        var robotGasStation = new CarStation(
+            new RobotDinner(),
+            new GasStation(),
+            new ArrayQueue<Car>());
+
+        var peopleElectricStation = new CarStation(
+            new PeopleDinner(),
+            new ElectricStation(),
+            new LinkedListQueue<Car>());
+
+        var peopleGasStation = new CarStation(
+            new PeopleDinner(),
+            new GasStation(),
+            new ArrayQueue<Car>());
+
+        var semaphore = new Semaphore(robotElectricStation, robotGasStation, peopleElectricStation, peopleGasStation);
 
         // Define the queue folder path
         var queueFolderPath = args[0];

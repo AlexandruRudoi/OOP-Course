@@ -1,69 +1,78 @@
-﻿using Newtonsoft.Json;
+﻿using Lab_3.Domain;
+using Newtonsoft.Json;
 
 namespace Lab_3.Services;
 
 public class Statistics
 {
-    /// <summary>
-    ///     Gets the total number of people served by dining services.
-    /// </summary>
-    /// <returns>The total count of people served.</returns>
-    public static int GetTotalPeopleServed()
-    {
-        return PeopleDinner.GetPeopleServedCount();
-    }
+    private static int _totalPeopleServed = 0;
+    private static int _totalRobotsServed = 0;
+    private static int _totalElectricConsumption = 0;
+    private static int _totalGasConsumption = 0;
+
+    private static int _electricCarsServed = 0;
+    private static int _gasCarsServed = 0;
+
+    private static int _diningCount = 0;
+    private static int _notDiningCount = 0;
 
     /// <summary>
-    ///     Gets the total number of robots served by dining services.
+    /// Updates statistics based on the car's attributes.
     /// </summary>
-    /// <returns>The total count of robots served.</returns>
-    public static int GetTotalRobotsServed()
+    /// <param name="car">The car being processed.</param>
+    public static void AddToStatistics(Car car)
     {
-        return RobotDinner.GetRobotsServedCount();
+        if (car.Passengers == "PEOPLE")
+        {
+            _totalPeopleServed++;
+        }
+        else if (car.Passengers == "ROBOTS")
+        {
+            _totalRobotsServed++;
+        }
+
+        if (car.Type == "ELECTRIC")
+        {
+            _electricCarsServed++;
+            _totalElectricConsumption += car.Consumption;
+        }
+        else if (car.Type == "GAS")
+        {
+            _gasCarsServed++;
+            _totalGasConsumption += car.Consumption;
+        }
+
+        if (car.IsDining)
+        {
+            _diningCount++;
+        }
+        else
+        {
+            _notDiningCount++;
+        }
     }
 
-    /// <summary>
-    ///     Gets the total number of electric cars served by refueling services.
-    /// </summary>
-    /// <returns>The total count of electric cars served.</returns>
-    public static int GetTotalElectricCarsServed()
-    {
-        return ElectricStation.GetElectricCarsServedCount();
-    }
-
-    /// <summary>
-    ///     Gets the total number of gas cars served by refueling services.
-    /// </summary>
-    /// <returns>The total count of gas cars served.</returns>
-    public static int GetTotalGasCarsServed()
-    {
-        return GasStation.GetGasCarsServedCount();
-    }
-    
     /// <summary>
     /// Generates a JSON-like string containing the aggregated statistics.
     /// </summary>
     /// <returns>A JSON-formatted string representing the statistics.</returns>
     public static string GenerateStatisticsJson()
     {
-        // Aggregate statistics
         var stats = new
         {
-            ELECTRIC = GetTotalElectricCarsServed(),
-            GAS = GetTotalGasCarsServed(),
-            PEOPLE = GetTotalPeopleServed(),
-            ROBOTS = GetTotalRobotsServed(),
-            DINING = GetTotalPeopleServed() + GetTotalRobotsServed(),
-            NOT_DINING = (GetTotalElectricCarsServed() + GetTotalGasCarsServed()) - 
-                         (GetTotalPeopleServed() + GetTotalRobotsServed()),
+            ELECTRIC = _electricCarsServed,
+            GAS = _gasCarsServed,
+            PEOPLE = _totalPeopleServed,
+            ROBOTS = _totalRobotsServed,
+            DINING = _diningCount,
+            NOT_DINING = _notDiningCount,
             CONSUMPTION = new
             {
-                ELECTRIC = ElectricStation.GetElectricCarsServedCount() * 20, // Replace with actual consumption logic
-                GAS = GasStation.GetGasCarsServedCount() * 15 // Replace with actual consumption logic
+                ELECTRIC = _totalElectricConsumption,
+                GAS = _totalGasConsumption
             }
         };
 
-        // Convert to JSON string
         return JsonConvert.SerializeObject(stats, Formatting.Indented);
     }
 }

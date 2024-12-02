@@ -83,14 +83,8 @@ public class Scheduler
                 }
 
                 // Check if there are cars processed before showing statistics
-                if (Statistics.GetTotalElectricCarsServed() > 0 ||
-                    Statistics.GetTotalGasCarsServed() > 0 ||
-                    Statistics.GetTotalPeopleServed() > 0 ||
-                    Statistics.GetTotalRobotsServed() > 0)
-                {
-                    Console.WriteLine("Statistics after serving:");
-                    Console.WriteLine(Statistics.GenerateStatisticsJson());
-                }
+                Console.WriteLine("Statistics after serving:");
+                Console.WriteLine(Statistics.GenerateStatisticsJson());
             }
             catch (Exception ex)
             {

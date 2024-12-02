@@ -9,72 +9,94 @@ namespace Lab_3.Tests;
 
 public class SemaphoreTests
 {
-    private CarStation _electricCarStation;
-    private LinkedListQueue<Car> _electricQueue;
-    private CarStation _gasCarStation;
-    private ArrayQueue<Car> _gasQueue;
+    private CarStation _robotElectricStation;
+    private CarStation _robotGasStation;
+    private CarStation _peopleElectricStation;
+    private CarStation _peopleGasStation;
+
+    private LinkedListQueue<Car> _robotElectricQueue;
+    private ArrayQueue<Car> _robotGasQueue;
+    private LinkedListQueue<Car> _peopleElectricQueue;
+    private ArrayQueue<Car> _peopleGasQueue;
+
     private Mock<IRefuelable> _mockElectricRefuelingService;
     private Mock<IRefuelable> _mockGasRefuelingService;
-    private Mock<IDineable> _mockPeopleDiningService;
-    private Mock<IDineable> _mockRobotDiningService;
+    private Mock<IDineable> _mockDiningService;
+
     private Semaphore _semaphore;
 
     [SetUp]
     public void Setup()
     {
-        // Mock dependencies
-        _mockPeopleDiningService = new Mock<IDineable>();
-        _mockRobotDiningService = new Mock<IDineable>();
+        _mockDiningService = new Mock<IDineable>();
         _mockElectricRefuelingService = new Mock<IRefuelable>();
         _mockGasRefuelingService = new Mock<IRefuelable>();
 
-        // Create queues
-        _electricQueue = new LinkedListQueue<Car>();
-        _gasQueue = new ArrayQueue<Car>();
+        _robotElectricQueue = new LinkedListQueue<Car>();
+        _robotGasQueue = new ArrayQueue<Car>();
+        _peopleElectricQueue = new LinkedListQueue<Car>();
+        _peopleGasQueue = new ArrayQueue<Car>();
 
-        // Create car stations
-        _electricCarStation = new CarStation(
-            _mockPeopleDiningService.Object,
-            _mockRobotDiningService.Object,
+        _robotElectricStation = new CarStation(
+            _mockDiningService.Object,
             _mockElectricRefuelingService.Object,
-            _electricQueue
+            _robotElectricQueue
         );
 
-        _gasCarStation = new CarStation(
-            _mockPeopleDiningService.Object,
-            _mockRobotDiningService.Object,
+        _robotGasStation = new CarStation(
+            _mockDiningService.Object,
             _mockGasRefuelingService.Object,
-            _gasQueue
+            _robotGasQueue
         );
 
-        // Create semaphore
-        _semaphore = new Semaphore(_electricCarStation, _gasCarStation);
+        _peopleElectricStation = new CarStation(
+            _mockDiningService.Object,
+            _mockElectricRefuelingService.Object,
+            _peopleElectricQueue
+        );
+
+        _peopleGasStation = new CarStation(
+            _mockDiningService.Object,
+            _mockGasRefuelingService.Object,
+            _peopleGasQueue
+        );
+
+        _semaphore = new Semaphore(
+            _robotElectricStation,
+            _robotGasStation,
+            _peopleElectricStation,
+            _peopleGasStation
+        );
     }
 
     [Test]
-    public void DispatchCar_ElectricCar_AddedToElectricStation()
+    public void DispatchCar_ElectricCarForRobots_AddedToRobotElectricStation()
     {
         var json =
-            "{\"id\": 5, \"type\": \"ELECTRIC\", \"passengers\": \"PEOPLE\", \"isDining\": false, \"consumption\": 49}";
+            "{\"id\": 5, \"type\": \"ELECTRIC\", \"passengers\": \"ROBOTS\", \"isDining\": false, \"consumption\": 49}";
         var car = CarParser.ParseFromJson(json);
 
         _semaphore.DispatchCar(car);
 
-        Assert.That(_electricCarStation.QueueCount(), Is.EqualTo(1));
-        Assert.That(_gasCarStation.QueueCount(), Is.EqualTo(0));
+        Assert.That(_robotElectricQueue.Count, Is.EqualTo(1));
+        Assert.That(_robotGasQueue.Count, Is.EqualTo(0));
+        Assert.That(_peopleElectricQueue.Count, Is.EqualTo(0));
+        Assert.That(_peopleGasQueue.Count, Is.EqualTo(0));
     }
 
     [Test]
-    public void DispatchCar_GasCar_AddedToGasStation()
+    public void DispatchCar_GasCarForPeople_AddedToPeopleGasStation()
     {
         var json =
-            "{\"id\": 2, \"type\": \"GAS\", \"passengers\": \"ROBOTS\", \"isDining\": true, \"consumption\": 42}";
+            "{\"id\": 2, \"type\": \"GAS\", \"passengers\": \"PEOPLE\", \"isDining\": true, \"consumption\": 42}";
         var car = CarParser.ParseFromJson(json);
 
         _semaphore.DispatchCar(car);
 
-        Assert.That(_electricCarStation.QueueCount(), Is.EqualTo(0));
-        Assert.That(_gasCarStation.QueueCount(), Is.EqualTo(1));
+        Assert.That(_robotElectricQueue.Count, Is.EqualTo(0));
+        Assert.That(_robotGasQueue.Count, Is.EqualTo(0));
+        Assert.That(_peopleElectricQueue.Count, Is.EqualTo(0));
+        Assert.That(_peopleGasQueue.Count, Is.EqualTo(1));
     }
 
     [Test]
@@ -82,10 +104,10 @@ public class SemaphoreTests
     {
         var carJsons = new[]
         {
-            "{\"id\": 5, \"type\": \"ELECTRIC\", \"passengers\": \"PEOPLE\", \"isDining\": false, \"consumption\": 49}",
-            "{\"id\": 2, \"type\": \"GAS\", \"passengers\": \"ROBOTS\", \"isDining\": true, \"consumption\": 42}",
-            "{\"id\": 6, \"type\": \"ELECTRIC\", \"passengers\": \"ROBOTS\", \"isDining\": false, \"consumption\": 46}",
-            "{\"id\": 8, \"type\": \"GAS\", \"passengers\": \"PEOPLE\", \"isDining\": true, \"consumption\": 25}"
+            "{\"id\": 5, \"type\": \"ELECTRIC\", \"passengers\": \"ROBOTS\", \"isDining\": false, \"consumption\": 49}",
+            "{\"id\": 2, \"type\": \"GAS\", \"passengers\": \"PEOPLE\", \"isDining\": true, \"consumption\": 42}",
+            "{\"id\": 6, \"type\": \"ELECTRIC\", \"passengers\": \"PEOPLE\", \"isDining\": false, \"consumption\": 46}",
+            "{\"id\": 8, \"type\": \"GAS\", \"passengers\": \"ROBOTS\", \"isDining\": true, \"consumption\": 25}"
         };
 
         foreach (var json in carJsons)
@@ -94,13 +116,17 @@ public class SemaphoreTests
             _semaphore.DispatchCar(car);
         }
 
-        Assert.That(_electricCarStation.QueueCount(), Is.EqualTo(2));
-        Assert.That(_gasCarStation.QueueCount(), Is.EqualTo(2));
+        Assert.That(_robotElectricQueue.Count, Is.EqualTo(1));
+        Assert.That(_robotGasQueue.Count, Is.EqualTo(1));
+        Assert.That(_peopleElectricQueue.Count, Is.EqualTo(1));
+        Assert.That(_peopleGasQueue.Count, Is.EqualTo(1));
 
         _semaphore.ServeAllCars();
 
-        Assert.That(_electricCarStation.QueueCount(), Is.EqualTo(0));
-        Assert.That(_gasCarStation.QueueCount(), Is.EqualTo(0));
+        Assert.That(_robotElectricQueue.Count, Is.EqualTo(0));
+        Assert.That(_robotGasQueue.Count, Is.EqualTo(0));
+        Assert.That(_peopleElectricQueue.Count, Is.EqualTo(0));
+        Assert.That(_peopleGasQueue.Count, Is.EqualTo(0));
     }
 
     [Test]
@@ -122,12 +148,10 @@ public class SemaphoreTests
 
         _semaphore.ServeAllCars();
 
-        // Verify refueling
         _mockElectricRefuelingService.Verify(r => r.Refuel(It.IsAny<string>()), Times.Exactly(2));
         _mockGasRefuelingService.Verify(r => r.Refuel(It.IsAny<string>()), Times.Exactly(2));
 
-        // Verify dining
-        _mockPeopleDiningService.Verify(d => d.ServeDinner(It.Is<string>(id => id == "1")), Times.Once);
-        _mockRobotDiningService.Verify(d => d.ServeDinner(It.IsAny<string>()), Times.Never);
+        _mockDiningService.Verify(d => d.ServeDinner(It.Is<string>(id => id == "1")), Times.Once);
+        _mockDiningService.Verify(d => d.ServeDinner(It.Is<string>(id => id == "9")), Times.Never);
     }
 }
