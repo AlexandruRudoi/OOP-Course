@@ -81,6 +81,16 @@ public class Scheduler
                 {
                     _semaphore.ServeAllCars();
                 }
+
+                // Check if there are cars processed before showing statistics
+                if (Statistics.GetTotalElectricCarsServed() > 0 ||
+                    Statistics.GetTotalGasCarsServed() > 0 ||
+                    Statistics.GetTotalPeopleServed() > 0 ||
+                    Statistics.GetTotalRobotsServed() > 0)
+                {
+                    Console.WriteLine("Statistics after serving:");
+                    Console.WriteLine(Statistics.GenerateStatisticsJson());
+                }
             }
             catch (Exception ex)
             {
